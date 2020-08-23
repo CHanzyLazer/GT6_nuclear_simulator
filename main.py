@@ -2155,10 +2155,9 @@ class main:
         print(event.x, event.y)
         print('左键{}'.format(pos))
 
-    @staticmethod
-    def heat2col(heat):
+    def heat2col(self, heat):
         midheat = 1000
-        color_num = floor((heat/(midheat+heat))*255*2)
+        color_num = self.relu(floor((heat/(midheat+heat))*255*2))
         B = 0
         if color_num <= 255:
             R = color_num
@@ -2168,10 +2167,9 @@ class main:
             G = 255 - (color_num-255)
         return '#{:0<2x}{:0<2x}{:0<2x}'.format(R,G,B)
 
-    @staticmethod
-    def fluid2col(fluid):
+    def fluid2col(self, fluid):
         midfluid = 100
-        color_num = floor((fluid/(midfluid+fluid))*(255+135))
+        color_num = self.relu(floor((fluid/(midfluid+fluid))*(255+135)))
         B = 255
         if color_num <= 135:
             R = 0
@@ -2181,15 +2179,17 @@ class main:
             G = 255
         return '#{:0<2x}{:0<2x}{:0<2x}'.format(R,G,B)
 
-    @staticmethod
-    def uti2col(utilization_N):
+    def uti2col(self, utilization_N):
         if utilization_N > 1:
             R,G,B = 255,60,60
         else:
             R,G,B = 255,255,255
         return '#{:0<2x}{:0<2x}{:0<2x}'.format(R,G,B)
 
-
+    @staticmethod
+    def relu(x):
+        y = x if x > 0 else 0
+        return y
 
     @staticmethod
     def functionAdaptor(fun,**kwds):
