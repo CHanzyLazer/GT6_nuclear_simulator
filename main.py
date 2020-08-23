@@ -160,6 +160,7 @@ class main:
         self.coolant_frame = Frame(self.simwin, width=300, height=200, bg='#aaaaaa', highlightthickness=1, highlightbackground='#101010')
         self.coolant_frame.grid(row=2, column=2, padx=5, pady=5)
         ##冷却液
+        self.nanana = 0
         self.coolantkeys = list(all_coolant.keys())
         col_num = 4
         i,j = 0,0
@@ -574,6 +575,13 @@ class main:
             for rod_id in self.rodkeys:
                 self.set_rod_inf(rod_id)
             self.draw_appand(updateid)
+        if self.mouse_setting['coolant'] == 'molten_sodium':
+            self.nanana += 1
+            if self.nanana == 3:
+                my_event = fake_event(*GetCursorPos())
+                message = infomation['molten_sodium']+infomation['molten_sodium_na']
+                self.Balloon_show(my_event,msg=message)
+        else: self.nanana = 0
 
     ##燃料棒信息
     def set_rod_inf(self, rod_id):
