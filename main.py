@@ -2157,7 +2157,8 @@ class main:
 
     def heat2col(self, heat):
         midheat = 1000
-        color_num = self.relu(floor((heat/(midheat+heat))*255*2))
+        heat_relu = self.relu(heat)
+        color_num = floor((heat_relu/(midheat+heat_relu))*255*2)
         B = 0
         if color_num <= 255:
             R = color_num
@@ -2169,7 +2170,8 @@ class main:
 
     def fluid2col(self, fluid):
         midfluid = 100
-        color_num = self.relu(floor((fluid/(midfluid+fluid))*(255+135)))
+        fluid_relu = self.relu(fluid)
+        color_num = floor((fluid_relu/(midfluid+fluid_relu))*(255+135))
         B = 255
         if color_num <= 135:
             R = 0
