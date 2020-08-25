@@ -1194,7 +1194,8 @@ class main:
                     if self.cores_setting[core_id]['base'] == 'core2x2':
                         self.draw_core_specific((i,j,0))
                     else: self.draw_core_specific((i,j,-1))
-        if dis:
+                    self.change_core_dis((i,j))
+        elif dis:
             for i in range(self.core_num):
                 for j in range(self.core_num):
                     self.change_core_dis((i,j))
@@ -1781,6 +1782,7 @@ class main:
         self.tick = input_tick
         self.is_start = True
         self.pause_mid = False
+        self.pause_mid_r = False
         self.point_color = ['\'#d3d3d3\'', '\'#414141\'']
         self.clr_time_graph(self.tick)
         self.start_b.grid_forget()
@@ -2047,7 +2049,7 @@ class main:
                                     self.reset_core_rod((i,j,-1))
                                     self.pause_mid = True
                                 if rod['overloaded2']:
-                                    self.pause_mid = True
+                                    self.pause_mid_r = True
                             if all_rods[rod['id']]['type'] == 'breed_rod':
                                 if rod['needed'] <= 0:
                                     self.set_core_rod((i,j,-1), rod_id=all_rods[rod['id']]['detail']['turnto'])
@@ -2063,7 +2065,7 @@ class main:
                                         self.reset_core_rod((i,j,k))
                                         self.pause_mid = True
                                     if rod['overloaded2']:
-                                        self.pause_mid = True
+                                        self.pause_mid_r = True
                                 if all_rods[rod['id']]['type'] == 'breed_rod':
                                     if rod['needed'] <= 0:
                                         self.set_core_rod((i,j,k), rod_id=all_rods[rod['id']]['detail']['turnto'])
@@ -2084,8 +2086,13 @@ class main:
                 self.draw_all(reform=False, draw=True, dis=True)
                 self.pause_b.grid_forget()
                 self.start_b.grid(row=3, column=5, padx=5, pady=5)
-                
-
+            elif self.pause_mid_r and self.is_start:
+                self.is_start = False
+                #停止后
+                self.input_tick = self.tick
+                self.draw_all(reform=False, draw=True, dis=True)
+                self.pause_b.grid_forget()
+                self.reset_b.grid(row=3, column=5, padx=5, pady=5)
 
             #remeber
             self.cores_setting['tttime'] += 1
@@ -2166,7 +2173,7 @@ class main:
         else:
             R = 255
             G = 255 - (color_num-255)
-        return '#{:0<2x}{:0<2x}{:0<2x}'.format(R,G,B)
+        return '#{:0>2x}{:0>2x}{:0>2x}'.format(R,G,B)
 
     def fluid2col(self, fluid):
         midfluid = 100
@@ -2179,14 +2186,14 @@ class main:
         else:
             R = (color_num-135)
             G = 255
-        return '#{:0<2x}{:0<2x}{:0<2x}'.format(R,G,B)
+        return '#{:0>2x}{:0>2x}{:0>2x}'.format(R,G,B)
 
     def uti2col(self, utilization_N):
         if utilization_N > 1:
             R,G,B = 255,60,60
         else:
             R,G,B = 255,255,255
-        return '#{:0<2x}{:0<2x}{:0<2x}'.format(R,G,B)
+        return '#{:0>2x}{:0>2x}{:0>2x}'.format(R,G,B)
 
     @staticmethod
     def relu(x):
