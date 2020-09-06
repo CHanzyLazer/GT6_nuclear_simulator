@@ -1497,11 +1497,11 @@ class main:
             if rod != None and rod['active']:
                 rod_type = all_rods[rod['id']]['type']
                 if rod_type == 'fuel_rod' and (not rod['depleted']):
-                    fluid = rod['neutron'] * coolant['fluid_eff'] / coolant['heat_capacity']
+                    fluid = ceil(rod['neutron'] * coolant['fluid_eff']) / coolant['heat_capacity']
                 elif rod_type == 'absorb_rod':
-                    fluid = rod['neutron']*2 * coolant['fluid_eff'] / coolant['heat_capacity']
+                    fluid = ceil(rod['neutron']*2 * coolant['fluid_eff']) / coolant['heat_capacity']
                 elif rod_type == 'breed_rod':
-                    fluid = rod['neutron']/2 * coolant['fluid_eff'] / coolant['heat_capacity']
+                    fluid = ceil(rod['neutron']/2 * coolant['fluid_eff']) / coolant['heat_capacity']
         elif self.cores_setting[core_id]['base'] == 'core2x2':
             coolant = all_coolant[self.cores_setting[core_id]['coolant']]
             for k in range(4):
@@ -1509,11 +1509,11 @@ class main:
                 if rod != None and rod['active']:
                     rod_type = all_rods[rod['id']]['type']
                     if rod_type == 'fuel_rod' and (not rod['depleted']):
-                        fluid += rod['neutron'] * coolant['fluid_eff'] / coolant['heat_capacity']
+                        fluid += ceil(rod['neutron'] * coolant['fluid_eff']) / coolant['heat_capacity']
                     elif rod_type == 'absorb_rod':
-                        fluid += rod['neutron']*2 * coolant['fluid_eff'] / coolant['heat_capacity']
+                        fluid += ceil(rod['neutron']*2 * coolant['fluid_eff']) / coolant['heat_capacity']
                     elif rod_type == 'breed_rod':
-                        fluid += rod['neutron']/2 * coolant['fluid_eff'] / coolant['heat_capacity']
+                        fluid += ceil(rod['neutron']/2 * coolant['fluid_eff']) / coolant['heat_capacity']
         self.cores_setting[core_id]['fluid'] = fluid
 
     def cal_all_fluid(self):
@@ -1540,11 +1540,11 @@ class main:
             if rod != None and rod['active']:
                 rod_type = all_rods[rod['id']]['type']
                 if rod_type == 'fuel_rod' and (not rod['depleted']):
-                    heat = floor(rod['neutron'] * coolant['utilization'])
+                    heat = ceil(rod['neutron'] * coolant['utilization'])
                 elif rod_type == 'absorb_rod':
-                    heat = floor(rod['neutron'] * 2 * coolant['utilization'])
+                    heat = ceil(rod['neutron'] * 2 * coolant['utilization'])
                 elif rod_type == 'breed_rod':
-                    heat = floor((rod['neutron'] / 2) * coolant['utilization'])
+                    heat = ceil((rod['neutron'] / 2) * coolant['utilization'])
         elif self.cores_setting[core_id]['base'] == 'core2x2':
             coolant = all_coolant[self.cores_setting[core_id]['coolant']]
             for k in range(4):
@@ -1552,11 +1552,11 @@ class main:
                 if rod != None and rod['active']:
                     rod_type = all_rods[rod['id']]['type']
                     if rod_type == 'fuel_rod' and (not rod['depleted']):
-                        heat += floor(rod['neutron'] * coolant['utilization'])
+                        heat += ceil(rod['neutron'] * coolant['utilization'])
                     elif rod_type == 'absorb_rod':
-                        heat += floor(rod['neutron'] * 2 * coolant['utilization'])
+                        heat += ceil(rod['neutron'] * 2 * coolant['utilization'])
                     elif rod_type == 'breed_rod':
-                        heat += floor((rod['neutron'] / 2) * coolant['utilization'])
+                        heat += ceil((rod['neutron'] / 2) * coolant['utilization'])
         self.cores_setting[core_id]['heat'] = heat
 
     def cal_all_heat(self):
