@@ -58,7 +58,7 @@ infomation = \
 
      'rod_2'       :'中子吸收棒\n\n吸收中子并释放两倍的热量',
      'rod_3'       :'中子反射棒\n\n反射中子回到源头, 加速反应',
-     'rod_4'       :'中子减速棒\n\n反射周围激活燃料棒倍数的中子, 比反射棒更能加速反应\n但周围的燃料棒会被慢化并继续慢化周围燃料棒\n慢化的燃料棒不能用于增殖且只能使用四分之一的时间',
+     'rod_4'       :'中子慢化棒\n\n反射周围激活燃料棒倍数的中子, 比反射棒更能加速反应\n但周围的燃料棒会被慢化并继续慢化周围燃料棒\n慢化的燃料棒不能用于增殖且只能使用四分之一的时间',
      'rod_10'      :'钍-230燃料棒\n\n在{}中\n向周围发射: {:<6d}中子\n向自身发射: {:<6d}中子\n最高发射：  {:<6d}中子\n系数: {}\n寿命: {:,} min\n{}',
      'rod_20'      :'铀-238燃料棒\n\n在{}中\n向周围发射: {:<6d}中子\n向自身发射: {:<6d}中子\n最高发射：  {:<6d}中子\n系数: {}\n寿命: {:,} min\n{}',
      'rod_21'      :'铀-235燃料棒\n\n在{}中\n向周围发射: {:<6d}中子\n向自身发射: {:<6d}中子\n最高发射：  {:<6d}中子\n系数: {}\n寿命: {:,} min\n{}\n这个燃料棒十分重要',
@@ -76,7 +76,7 @@ infomation = \
      'rod_120'     :'铀-238增殖棒\n\n吸收中子以增殖成新燃料棒\n增殖时每个中子释放一半的热量\n不能用慢化的燃料棒的中子增殖\n实际进度随吸收中子数指数增加\n\n需要: 288,000,000 中子\n转换成: 钚-239燃料棒',
      'rod_2_name'  :'中子吸收棒',
      'rod_3_name'  :'中子反射棒',
-     'rod_4_name'  :'中子减速棒',
+     'rod_4_name'  :'中子慢化棒',
      'rod_10_name' :'钍-230燃料棒',
      'rod_20_name' :'铀-238燃料棒',
      'rod_21_name' :'铀-235燃料棒',
@@ -168,7 +168,7 @@ all_rods = \
                'name':'Ref',
                'name_col':'#709663',
                'detail':None},
-     'rod_4':{'tex_name':'中子减速棒',
+     'rod_4':{'tex_name':'中子慢化棒',
                'type':'moderate_rod',
                'name':'Mod',
                'name_col':'#403f6e',
@@ -440,3 +440,19 @@ all_coolant = \
                                'fluid_eff'    :1/6,
                                'name'         :'Na',
                                'name_col'     :'#0000ff'}}
+
+if __name__ == "__main__":
+    from ruamel import yaml
+    Data = {'version':version,
+            'font_normal':font_normal,
+            'font_small':font_small,
+            'font_button':font_button,
+            'font_namesC':font_namesC,
+            'font_namesR':font_namesR,
+            'font_heat':font_heat,
+            'infomation':infomation,
+            'all_rods':all_rods,
+            'all_coolant':all_coolant}
+    file = open('data.cfg', 'w', encoding='utf-8')
+    yaml.dump(Data, file, default_flow_style=False, Dumper=yaml.RoundTripDumper, allow_unicode=True)
+    file.close()

@@ -10,7 +10,23 @@ from win32api import GetCursorPos,GetSystemMetrics
 from copy import deepcopy
 
 #数据和信息
-from data import *
+import yaml
+file = open('data.cfg', 'r', encoding="utf-8")
+file_data = file.read()
+file.close()
+data = yaml.load(file_data, Loader=yaml.FullLoader)
+
+version = data['version']
+font_normal = data['font_normal']
+font_small = data['font_small']
+font_button = data['font_button']
+font_namesC = data['font_namesC']
+font_namesR = data['font_namesR']
+font_heat = data['font_heat']
+infomation = data['infomation']
+all_rods = data['all_rods']
+all_coolant = data['all_coolant']
+
 #图片预导入
 ##背景贴图
 bgimg = PIL.Image.open('textures/itembg.png').resize((64,64), PIL.Image.NEAREST)
@@ -1705,7 +1721,7 @@ class main:
             final_pre_time_s = final_pre_time//20
             ##推演预测
             ###产热和时间
-            self.cores_setting['ttheat'] += final_pre_time_s*self.cores_setting['heat']*20
+            self.cores_setting['ttheat'] += final_pre_time_s*self.pheat*20
             self.cores_setting['tttime'] += final_pre_time_s
             ###损耗
             for i in range(self.core_num):
@@ -2222,9 +2238,9 @@ class fake_event:
         self.x_root = x_root
         self.y_root = y_root
 
-def _test():
+def _start():
     m = main()
     m.simwin.mainloop()
 
 if __name__ == "__main__":
-    _test()
+    _start()
