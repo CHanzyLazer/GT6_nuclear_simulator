@@ -8,6 +8,8 @@ import PIL.Image
 import PIL.ImageDraw
 from win32api import GetCursorPos,GetSystemMetrics
 from copy import deepcopy
+#test git
+
 
 #数据和信息
 import yaml
@@ -26,6 +28,7 @@ font_heat = data['font_heat']
 infomation = data['infomation']
 all_rods = data['all_rods']
 all_coolant = data['all_coolant']
+
 
 #图片预导入
 ##背景贴图
