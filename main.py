@@ -6,7 +6,8 @@ from math import floor, ceil, pow
 import PIL.ImageTk
 import PIL.Image
 import PIL.ImageDraw
-from win32api import GetCursorPos, GetSystemMetrics
+# from win32api import GetCursorPos
+from mouse import get_position as GetCursorPos
 from copy import deepcopy
 
 

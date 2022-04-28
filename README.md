@@ -13,10 +13,21 @@
 直接在[Releases](https://github.com/CHanzyLazer/GT6_nuclear_simulator/releases)下载
 
 # 代码
+## 运行
 需要前置包
-```
+```shell
 pip install pillow
-pip install pywin32
+pip install mouse==0.7.0
 pip install pyyaml
 ```
 运行 `main.py` 即可
+
+## 打包
+使用 pyinstaller 打包：
+```shell
+pip install pyinstaller
+```
+运行
+```shell
+pyinstaller -F -w -i textures\nuclearsim.ico main.py
+```
