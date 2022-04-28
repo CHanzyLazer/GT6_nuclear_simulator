@@ -13,7 +13,7 @@ from copy import deepcopy
 
 #数据和信息
 import yaml
-file = open('data.cfg', 'r', encoding="utf-8")
+file = open('data.yml', 'r', encoding="utf-8")
 file_data = file.read()
 file.close()
 data = yaml.load(file_data, Loader=yaml.FullLoader)
@@ -32,44 +32,44 @@ all_coolant = data['all_coolant']
 
 #图片预导入
 ##背景贴图
-bgimg = PIL.Image.open('textures/itembg.png').resize((64,64), PIL.Image.NEAREST)
-m1img = PIL.Image.open('textures/m1.png').resize((64,64), PIL.Image.NEAREST)
-m2img = PIL.Image.open('textures/m2.png').resize((64,64), PIL.Image.NEAREST)
-coolantimg = PIL.Image.open('textures/coolant.png').resize((64,64), PIL.Image.NEAREST)
+bgimg = PIL.Image.open('textures/itembg.png').resize((64,64), PIL.Image.Resampling.NEAREST)
+m1img = PIL.Image.open('textures/m1.png').resize((64,64), PIL.Image.Resampling.NEAREST)
+m2img = PIL.Image.open('textures/m2.png').resize((64,64), PIL.Image.Resampling.NEAREST)
+coolantimg = PIL.Image.open('textures/coolant.png').resize((64,64), PIL.Image.Resampling.NEAREST)
 core1x1topimg = PIL.Image.open('textures/core1x1top.png')
 core2x2top_partimg = PIL.Image.open('textures/core2x2top_part.png')
-startimg = PIL.Image.open('textures/start.png').resize((128,64), PIL.Image.NEAREST)
-stopimg = PIL.Image.open('textures/stop.png').resize((128,64), PIL.Image.NEAREST)
-pauseimg = PIL.Image.open('textures/pause.png').resize((128,64), PIL.Image.NEAREST)
-resetimg = PIL.Image.open('textures/reset.png').resize((128,64), PIL.Image.NEAREST)
+startimg = PIL.Image.open('textures/start.png').resize((128,64), PIL.Image.Resampling.NEAREST)
+stopimg = PIL.Image.open('textures/stop.png').resize((128,64), PIL.Image.Resampling.NEAREST)
+pauseimg = PIL.Image.open('textures/pause.png').resize((128,64), PIL.Image.Resampling.NEAREST)
+resetimg = PIL.Image.open('textures/reset.png').resize((128,64), PIL.Image.Resampling.NEAREST)
 time_linesimg = PIL.Image.open('textures/time_lines.png')
-selectedimg = PIL.Image.open('textures/selected.png').resize((40,40), PIL.Image.NEAREST)
+selectedimg = PIL.Image.open('textures/selected.png').resize((40,40), PIL.Image.Resampling.NEAREST)
 ##燃料棒图片
 rodkeys = list(all_rods.keys())
 for rod_id in rodkeys:
-    exec('{0}img = PIL.Image.open(\'textures/{1}.png\').resize((64,64), PIL.Image.NEAREST)'.format(rod_id, all_rods[rod_id]['tex_name']))
+    exec('{0}img = PIL.Image.open(\'textures/{1}.png\').resize((64,64), PIL.Image.Resampling.NEAREST)'.format(rod_id, all_rods[rod_id]['tex_name']))
     exec('{0}topimg = PIL.Image.open(\'textures/{1}top.png\')'.format(rod_id, all_rods[rod_id]['tex_name']))
     exec('{0}top_closeimg = PIL.Image.open(\'textures/{1}top_close.png\')'.format(rod_id, all_rods[rod_id]['tex_name']))
 ##冷却液图片
 coolantkeys = list(all_coolant.keys())
 for coolant_id in coolantkeys:
-    exec('{0}img = PIL.Image.open(\'textures/{0}.png\').resize((64,64), PIL.Image.NEAREST)'.format(coolant_id))
+    exec('{0}img = PIL.Image.open(\'textures/{0}.png\').resize((64,64), PIL.Image.Resampling.NEAREST)'.format(coolant_id))
 
 ##工具图片
-core1x1img = PIL.Image.open('textures/core1x1.png').resize((64,64), PIL.Image.NEAREST)
-core2x2img = PIL.Image.open('textures/core2x2.png').resize((64,64), PIL.Image.NEAREST)
-wrenchimg = PIL.Image.open('textures/wrench.png').resize((64,64), PIL.Image.NEAREST)
-pliersimg = PIL.Image.open('textures/pliers.png').resize((64,64), PIL.Image.NEAREST)
-soft_hammerimg = PIL.Image.open('textures/soft_hammer.png').resize((64,64), PIL.Image.NEAREST)
+core1x1img = PIL.Image.open('textures/core1x1.png').resize((64,64), PIL.Image.Resampling.NEAREST)
+core2x2img = PIL.Image.open('textures/core2x2.png').resize((64,64), PIL.Image.Resampling.NEAREST)
+wrenchimg = PIL.Image.open('textures/wrench.png').resize((64,64), PIL.Image.Resampling.NEAREST)
+pliersimg = PIL.Image.open('textures/pliers.png').resize((64,64), PIL.Image.Resampling.NEAREST)
+soft_hammerimg = PIL.Image.open('textures/soft_hammer.png').resize((64,64), PIL.Image.Resampling.NEAREST)
 
 ##显示设置贴图
-dis_namesimg = PIL.Image.open('textures/dis_names.png').resize((40,40), PIL.Image.NEAREST)
-dis_heatimg = PIL.Image.open('textures/dis_heat.png').resize((40,40), PIL.Image.NEAREST)
-dis_neutronimg = PIL.Image.open('textures/dis_neutron.png').resize((40,40), PIL.Image.NEAREST)
-dis_fluidimg = PIL.Image.open('textures/dis_fluid.png').resize((40,40), PIL.Image.NEAREST)
-dis_moderateimg = PIL.Image.open('textures/dis_moderate.png').resize((40,40), PIL.Image.NEAREST)
-dis_utilizationimg = PIL.Image.open('textures/dis_utilization.png').resize((40,40), PIL.Image.NEAREST)
-dis_progressimg = PIL.Image.open('textures/dis_progress.png').resize((40,40), PIL.Image.NEAREST)
+dis_namesimg = PIL.Image.open('textures/dis_names.png').resize((40,40), PIL.Image.Resampling.NEAREST)
+dis_heatimg = PIL.Image.open('textures/dis_heat.png').resize((40,40), PIL.Image.Resampling.NEAREST)
+dis_neutronimg = PIL.Image.open('textures/dis_neutron.png').resize((40,40), PIL.Image.Resampling.NEAREST)
+dis_fluidimg = PIL.Image.open('textures/dis_fluid.png').resize((40,40), PIL.Image.Resampling.NEAREST)
+dis_moderateimg = PIL.Image.open('textures/dis_moderate.png').resize((40,40), PIL.Image.Resampling.NEAREST)
+dis_utilizationimg = PIL.Image.open('textures/dis_utilization.png').resize((40,40), PIL.Image.Resampling.NEAREST)
+dis_progressimg = PIL.Image.open('textures/dis_progress.png').resize((40,40), PIL.Image.Resampling.NEAREST)
 
 def close_window():
     exit()
@@ -115,7 +115,7 @@ class main:
         self.simwin = Tk()
         self.simwin.title('nuclearSimulator-{}'.format(version))
         self.simwin.iconbitmap('textures/nuclearsim.ico') 
-        self.simwin.geometry('1560x680')
+        self.simwin.geometry('1640x670')
         self.simwin["background"] = '#aaaaaa'
         self.simwin.resizable(width=False, height=False)
         self.simwin.protocol('WM_DELETE_WINDOW', close_window)
@@ -150,11 +150,11 @@ class main:
         self.redsize_b.bind('<Leave>',self.Balloon_destroy)
 
         #燃料棒部分
-        self.rod_frame = Frame(self.simwin, width=300, height=590, bg='#aaaaaa', highlightthickness=1, highlightbackground='#101010')
-        self.rod_frame.grid(row=0, column=2, rowspan=2, padx=5, pady=5)
+        self.rod_frame = Frame(self.simwin, width=360, height=650, bg='#aaaaaa', highlightthickness=1, highlightbackground='#101010')
+        self.rod_frame.grid(row=0, column=2, rowspan=3, columnspan=2, padx=5, pady=5)
         ##燃料棒
         self.rodkeys = list(all_rods.keys())
-        col_num = 4
+        col_nums = [3, 5, 5, 3, 3, 3]
         i,j = 0,0
         for rod_id in self.rodkeys:
             ###绘图
@@ -164,7 +164,7 @@ class main:
             exec('self.{0}_image=self.{0}.create_image(0, 0, anchor=NW, image={0}TexTk)'.format(rod_id))
             exec('self.{0}TexTk = {0}TexTk'.format(rod_id)) # keep img not be deleted
             exec('self.{0}.grid(row={1}, column={2}, padx=2, pady=2)'.format(rod_id, i,j))
-            if j < col_num-1:
+            if j < col_nums[i]-1:
                 j += 1
             else:
                 j = 0
@@ -177,7 +177,7 @@ class main:
 
         #冷却液部分
         self.coolant_frame = Frame(self.simwin, width=300, height=200, bg='#aaaaaa', highlightthickness=1, highlightbackground='#101010')
-        self.coolant_frame.grid(row=2, column=2, padx=5, pady=5)
+        self.coolant_frame.grid(row=3, column=3, rowspan=2, padx=5, pady=5)
         ##冷却液
         self.nanana = 0
         self.coolantkeys = list(all_coolant.keys())
@@ -202,8 +202,8 @@ class main:
             exec('self.{0}.bind(\'<Button-1>\',self.functionAdaptor(self.set_coolant, setting=coolant_id))'.format(coolant_id))
 
         #工具部分
-        self.tool_frame = Frame(self.simwin, width=380, height=70, bg='#aaaaaa', highlightthickness=1, highlightbackground='#101010')
-        self.tool_frame.grid(row=3, column=2, padx=5, pady=5)
+        self.tool_frame = Frame(self.simwin, width=120, height=200, bg='#aaaaaa', highlightthickness=1, highlightbackground='#101010')
+        self.tool_frame.grid(row=3, column=2, rowspan=2, padx=5, pady=5)
         ##1x1反应室
         ###绘图
         self.core1x1 = Canvas(self.tool_frame, width=64, height=64, bg='#aaaaaa', highlightthickness=0)
@@ -211,7 +211,7 @@ class main:
         core1x1TexTk = PIL.ImageTk.PhotoImage(core1x1Tex)
         self.core1x1_image=self.core1x1.create_image(0, 0, anchor=NW, image=core1x1TexTk)
         self.core1x1TexTk = core1x1TexTk # keep img not be deleted
-        self.core1x1.pack(side=LEFT, padx=2, pady=2)
+        self.core1x1.grid(row=0, column=0, padx=2, pady=2)
         ###添加触发
         self.core1x1.bind('<Enter>',self.functionAdaptor(self.Balloon_show, msg=infomation['core1x1']))
         self.core1x1.bind('<Leave>',self.Balloon_destroy)
@@ -224,7 +224,7 @@ class main:
         core2x2TexTk = PIL.ImageTk.PhotoImage(core2x2Tex)
         self.core2x2_image=self.core2x2.create_image(0, 0, anchor=NW, image=core2x2TexTk)
         self.core2x2TexTk = core2x2TexTk # keep img not be deleted
-        self.core2x2.pack(side=LEFT, padx=2, pady=2)
+        self.core2x2.grid(row=0, column=1, padx=2, pady=2)
         ###添加触发
         self.core2x2.bind('<Enter>',self.functionAdaptor(self.Balloon_show, msg=infomation['core2x2']))
         self.core2x2.bind('<Leave>',self.Balloon_destroy)
@@ -237,7 +237,7 @@ class main:
         wrenchTexTk = PIL.ImageTk.PhotoImage(wrenchTex)
         self.wrench_image=self.wrench.create_image(0, 0, anchor=NW, image=wrenchTexTk)
         self.wrenchTexTk = wrenchTexTk # keep img not be deleted
-        self.wrench.pack(side=LEFT, padx=2, pady=2)
+        self.wrench.grid(row=1, column=0, padx=2, pady=2)
         ###添加触发
         self.wrench.bind('<Enter>',self.functionAdaptor(self.Balloon_show, msg=infomation['wrench']))
         self.wrench.bind('<Leave>',self.Balloon_destroy)
@@ -250,7 +250,7 @@ class main:
         pliersTexTk = PIL.ImageTk.PhotoImage(pliersTex)
         self.pliers_image=self.pliers.create_image(0, 0, anchor=NW, image=pliersTexTk)
         self.pliersTexTk = pliersTexTk # keep img not be deleted
-        self.pliers.pack(side=LEFT, padx=2, pady=2)
+        self.pliers.grid(row=1, column=1, padx=2, pady=2)
         ###添加触发
         self.pliers.bind('<Enter>',self.functionAdaptor(self.Balloon_show, msg=infomation['pliers']))
         self.pliers.bind('<Leave>',self.Balloon_destroy)
@@ -263,7 +263,7 @@ class main:
         soft_hammerTexTk = PIL.ImageTk.PhotoImage(soft_hammerTex)
         self.soft_hammer_image=self.soft_hammer.create_image(0, 0, anchor=NW, image=soft_hammerTexTk)
         self.soft_hammerTexTk = soft_hammerTexTk # keep img not be deleted
-        self.soft_hammer.pack(side=LEFT, padx=2, pady=2)
+        self.soft_hammer.grid(row=2, column=0, padx=2, pady=2)
         ###添加触发
         self.soft_hammer.bind('<Enter>',self.functionAdaptor(self.Balloon_show, msg=infomation['soft_hammer']))
         self.soft_hammer.bind('<Leave>',self.Balloon_destroy)
@@ -274,7 +274,7 @@ class main:
 
         #反应堆部分
         self.cores_frame = Frame(self.simwin, width=600, height=600, bg='#aaaaaa', highlightthickness=1, highlightbackground='#101010')
-        self.cores_frame.grid(row=1, column=0,rowspan=3, columnspan=2, padx=5, pady=5)
+        self.cores_frame.grid(row=1, column=0, rowspan=4, columnspan=2, padx=5, pady=5)
         self.form_core()
 
         ######################
@@ -285,7 +285,7 @@ class main:
         startTk = PIL.ImageTk.PhotoImage(startimg)
         self.start_b = Button(self.simwin, image=startTk, command=lambda:self.start_sim(input_tick=self.input_tick), highlightthickness=0, bg='#aaaaaa',activebackground='#aaaaaa',bd=4)
         self.startTk = startTk
-        self.start_b.grid(row=3, column=5, padx=5, pady=5)
+        self.start_b.grid(row=4, column=6, padx=5, pady=5)
         ##触发
         self.start_b.bind('<Enter>',self.functionAdaptor(self.Balloon_show, msg=infomation['start_b']))
         self.start_b.bind('<Leave>',self.Balloon_destroy)
@@ -299,7 +299,7 @@ class main:
         stopTk = PIL.ImageTk.PhotoImage(stopimg)
         self.stop_b = Button(self.simwin, image=stopTk, command=lambda:self.stop_sim(input_tick=self.input_tick), highlightthickness=0, bg='#aaaaaa',activebackground='#aaaaaa',bd=4)
         self.stopTk = stopTk
-        self.stop_b.grid(row=3, column=4, padx=5, pady=5)
+        self.stop_b.grid(row=4, column=5, padx=5, pady=5)
         ##触发
         self.stop_b.bind('<Enter>',self.functionAdaptor(self.Balloon_show, msg=infomation['stop_b']))
         self.stop_b.bind('<Leave>',self.Balloon_destroy)
@@ -314,11 +314,11 @@ class main:
 
         #时间轴
         self.time_graph = Canvas(self.simwin, width=580, height=300, bg='#ffffff', highlightthickness=0)
-        time_linesTex = time_linesimg.resize((580,300), PIL.Image.NEAREST)
+        time_linesTex = time_linesimg.resize((580,300), PIL.Image.Resampling.NEAREST)
         time_linesTexTk = PIL.ImageTk.PhotoImage(time_linesTex)
         self.time_lines = self.time_graph.create_image(0, 0, anchor=NW, image=time_linesTexTk)
         self.time_linesTexTk = time_linesTexTk
-        self.time_graph.grid(row=0, column=3, rowspan=2, columnspan=3, padx=5, pady=5)
+        self.time_graph.grid(row=0, column=4, rowspan=2, columnspan=3, padx=5, pady=5)
         ##效率百分百横线
         self.u100line = self.time_graph.create_line(0,300/2,580,300/2,fill='#ff8888', dash=(4, 4))
         self.u100text = self.time_graph.create_text(7,300/2-2,text='', anchor=SW, font=font_normal,fill='#9e4545')
@@ -332,7 +332,7 @@ class main:
 
         #数据统计
         self.data_frame = Frame(self.simwin, width=580, height=230, bg='#aaaaaa', highlightthickness=1, highlightbackground='#101010')
-        self.data_frame.grid(row=2, column=3, columnspan=3, padx=5, pady=5, sticky=NW)
+        self.data_frame.grid(row=2, column=4, rowspan=2, columnspan=3, padx=5, pady=5, sticky=NW)
         self.data_frame0 = Frame(self.data_frame, width=200, height=200, bg='#aaaaaa')
         self.data_frame0.place(x=0, y=0, anchor=NW)
         self.data_frame1 = Frame(self.data_frame, width=200, height=200, bg='#aaaaaa')
@@ -423,10 +423,15 @@ class main:
                     self.cores_setting[core_id]['rod']['utilization_N']=0
                 elif rod_type == 'breed_rod':
                     self.cores_setting[core_id]['rod']['needed']=all_rods[rod_id]['detail']['needed']
+                    self.cores_setting[core_id]['rod']['loss']=all_rods[rod_id]['detail']['loss']
                     self.cores_setting[core_id]['rod']['neutron']=0
                     self.cores_setting[core_id]['rod']['get_neutron']=0
                     self.cores_setting[core_id]['rod']['get_neutron_moderated']=0
                     self.cores_setting[core_id]['rod']['truning_speed']=0
+                elif rod_type == 'enrich_rod':
+                    self.cores_setting[core_id]['rod']['neutron']=0
+                    self.cores_setting[core_id]['rod']['get_neutron']=0
+                    self.cores_setting[core_id]['rod']['get_neutron_moderated']=0
                 elif rod_type == 'absorb_rod':
                     self.cores_setting[core_id]['rod']['neutron']=0
                     self.cores_setting[core_id]['rod']['get_neutron']=0
@@ -454,6 +459,10 @@ class main:
                     self.cores_setting[core_id]['rod'][k]['get_neutron']=0
                     self.cores_setting[core_id]['rod'][k]['get_neutron_moderated']=0
                     self.cores_setting[core_id]['rod'][k]['truning_speed']=0
+                elif rod_type == 'enrich_rod':
+                    self.cores_setting[core_id]['rod'][k]['neutron']=0
+                    self.cores_setting[core_id]['rod'][k]['get_neutron']=0
+                    self.cores_setting[core_id]['rod'][k]['get_neutron_moderated']=0
                 elif rod_type == 'absorb_rod':
                     self.cores_setting[core_id]['rod'][k]['neutron']=0
                     self.cores_setting[core_id]['rod'][k]['get_neutron']=0
@@ -485,6 +494,10 @@ class main:
                         self.cores_setting[core_id]['rod']['get_neutron']=0
                         self.cores_setting[core_id]['rod']['get_neutron_moderated']=0
                         self.cores_setting[core_id]['rod']['truning_speed']=0
+                    elif rod_type == 'enrich_rod':
+                        self.cores_setting[core_id]['rod']['neutron']=0
+                        self.cores_setting[core_id]['rod']['get_neutron']=0
+                        self.cores_setting[core_id]['rod']['get_neutron_moderated']=0
                     elif rod_type == 'absorb_rod':
                         self.cores_setting[core_id]['rod']['neutron']=0
                         self.cores_setting[core_id]['rod']['get_neutron']=0
@@ -512,6 +525,10 @@ class main:
                             self.cores_setting[core_id]['rod'][k]['get_neutron']=0
                             self.cores_setting[core_id]['rod'][k]['get_neutron_moderated']=0
                             self.cores_setting[core_id]['rod'][k]['truning_speed']=0
+                        elif rod_type == 'enrich_rod':
+                            self.cores_setting[core_id]['rod'][k]['neutron']=0
+                            self.cores_setting[core_id]['rod'][k]['get_neutron']=0
+                            self.cores_setting[core_id]['rod'][k]['get_neutron_moderated']=0
                         elif rod_type == 'absorb_rod':
                             self.cores_setting[core_id]['rod'][k]['neutron']=0
                             self.cores_setting[core_id]['rod'][k]['get_neutron']=0
@@ -539,6 +556,10 @@ class main:
                                 self.cores_setting[core_id]['rod'][k]['get_neutron']=0
                                 self.cores_setting[core_id]['rod'][k]['get_neutron_moderated']=0
                                 self.cores_setting[core_id]['rod'][k]['truning_speed']=0
+                            elif rod_type == 'enrich_rod':
+                                self.cores_setting[core_id]['rod'][k]['neutron']=0
+                                self.cores_setting[core_id]['rod'][k]['get_neutron']=0
+                                self.cores_setting[core_id]['rod'][k]['get_neutron_moderated']=0
                             elif rod_type == 'absorb_rod':
                                 self.cores_setting[core_id]['rod'][k]['neutron']=0
                                 self.cores_setting[core_id]['rod'][k]['get_neutron']=0
@@ -615,6 +636,8 @@ class main:
             factor_num = self.factor_num
             life_num = round(all_rods[rod_id]['detail']['life'] * coolant['life'])
             coolant_rod = infomation[self.mouse_setting['coolant']+'_rod']
+            if coolant_rod != '':
+                coolant_rod = '\n' + coolant_rod
             message = infomation[rod_id]\
                 .format(coolant_name, emission_num, self_num, maximum_num, '1/'+str(factor_num), life_num//60, coolant_rod)
         else:
@@ -714,13 +737,13 @@ class main:
                 #绘图
                 exec('self.{0}_cell{1} = Canvas(self.{0}, width={2}, height={2}, highlightthickness=0)'\
                     .format(core_id, k, core_size//2-2))
-                exec('{0}_cell{1}Tex = core2x2top_partimg.resize(({2},{2}), PIL.Image.NEAREST)'\
+                exec('{0}_cell{1}Tex = core2x2top_partimg.resize(({2},{2}), PIL.Image.Resampling.NEAREST)'\
                     .format(core_id, k, core_size//2-2))
                 rod = self.cores_setting[core_id]['rod'][k]
                 if rod != None:
                     if rod['active']: exec('rodTex_part = {0}topimg.crop((4,4,12,12))'.format(rod['id']))
                     else: exec('rodTex_part = {0}top_closeimg.crop((4,4,12,12))'.format(rod['id']))
-                    exec('rodTex_part = rodTex_part.resize(({0},{0}), PIL.Image.NEAREST)'.format(core_size//2-2))
+                    exec('rodTex_part = rodTex_part.resize(({0},{0}), PIL.Image.Resampling.NEAREST)'.format(core_size//2-2))
                     exec('{0}_cell{1}Tex = PIL.Image.alpha_composite({0}_cell{1}Tex, rodTex_part)'.format(core_id, k))
                 exec('{0}_cell{1}TexTk = PIL.ImageTk.PhotoImage({0}_cell{1}Tex)'.format(core_id, k))
                 exec('self.{0}_cell{1}_image=self.{0}_cell{1}.create_image(0,0,anchor=NW,image={0}_cell{1}TexTk)'.format(core_id, k))
@@ -738,12 +761,12 @@ class main:
             if self.cores_setting[core_id]['base'] == 'core1x1':
                 exec('self.{0}_cell0 = Canvas(self.{0}, width={1}, height={1}, highlightthickness=0)'\
                     .format(core_id, core_size-4))
-                exec('{0}_cell0Tex = core1x1topimg.resize(({1},{1}), PIL.Image.NEAREST)'\
+                exec('{0}_cell0Tex = core1x1topimg.resize(({1},{1}), PIL.Image.Resampling.NEAREST)'\
                     .format(core_id, core_size-4))
                 rod = self.cores_setting[core_id]['rod']
                 if rod != None:
-                    if rod['active']: exec('rodTex = {0}topimg.resize(({1},{1}), PIL.Image.NEAREST)'.format(rod['id'], core_size-4))
-                    else: exec('rodTex = {0}top_closeimg.resize(({1},{1}), PIL.Image.NEAREST)'.format(rod['id'], core_size-4))
+                    if rod['active']: exec('rodTex = {0}topimg.resize(({1},{1}), PIL.Image.Resampling.NEAREST)'.format(rod['id'], core_size-4))
+                    else: exec('rodTex = {0}top_closeimg.resize(({1},{1}), PIL.Image.Resampling.NEAREST)'.format(rod['id'], core_size-4))
                     exec('{0}_cell0Tex = PIL.Image.alpha_composite({0}_cell0Tex, rodTex)'.format(core_id))
                 exec('{0}_cell0TexTk = PIL.ImageTk.PhotoImage({0}_cell0Tex)'.format(core_id))
                 exec('self.{0}_cell0_image=self.{0}_cell0.create_image(0,0,anchor=NW,image={0}_cell0TexTk)'.format(core_id))
@@ -751,7 +774,7 @@ class main:
 
             elif self.cores_setting[core_id]['base'] == None:
                 exec('self.{0}_cell0 = Canvas(self.{0}, width={1}, height={1}, highlightthickness=0)'.format(core_id, core_size-4))
-                exec('{0}_cell0Tex = bgimg.resize(({1},{1}), PIL.Image.NEAREST)'.format(core_id, core_size-4))
+                exec('{0}_cell0Tex = bgimg.resize(({1},{1}), PIL.Image.Resampling.NEAREST)'.format(core_id, core_size-4))
                 exec('{0}_cell0TexTk = PIL.ImageTk.PhotoImage({0}_cell0Tex)'.format(core_id))
                 exec('self.{0}_cell0_image=self.{0}_cell0.create_image(0,0,anchor=NW,image={0}_cell0TexTk)'.format(core_id))
                 exec('self.{0}_cell0TexTk = {0}_cell0TexTk'.format(core_id)) # keep img not be deleted
@@ -814,7 +837,7 @@ class main:
                 else:
                     rod_inf += '\n{}'.format(infomation['core_com9'])
                     #...
-            elif all_rods[rod['id']]['type'] == 'absorb_rod':
+            elif all_rods[rod['id']]['type'] == 'absorb_rod' or all_rods[rod['id']]['type'] == 'enrich_rod':
                 if rod['active']: rod_inf += '\n{}'.format(infomation['core_com1'].format(rod['neutron']))
                 else: rod_inf += '\n{}'.format(infomation['core_com13'])
             elif all_rods[rod['id']]['type'] == 'breed_rod':
@@ -911,7 +934,7 @@ class main:
         if not quarter: # 改变行为是否是四分之一单位的
             if basetype == None:
                 if k == -1: # 改变的对象是否是四分之一的
-                    exec('{0}_cell0Tex = bgimg.resize(({1},{1}), PIL.Image.NEAREST)'.format(core_id, core_size-4))
+                    exec('{0}_cell0Tex = bgimg.resize(({1},{1}), PIL.Image.Resampling.NEAREST)'.format(core_id, core_size-4))
                     exec('{0}_cell0TexTk = PIL.ImageTk.PhotoImage({0}_cell0Tex)'.format(core_id))
                     exec('self.{0}_cell0.itemconfigure(self.{0}_cell0_image, image={0}_cell0TexTk)'.format(core_id))
                     exec('self.{0}_cell0TexTk = {0}_cell0TexTk'.format(core_id)) # keep img not be deleted
@@ -922,11 +945,11 @@ class main:
                     self.form_core_cell((i,j), False)
             elif basetype == 'core1x1':
                 if k == -1: # 改变的对象是否是四分之一的
-                    exec('{0}_cell0Tex = core1x1topimg.resize(({1},{1}), PIL.Image.NEAREST)'.format(core_id, core_size-4))
+                    exec('{0}_cell0Tex = core1x1topimg.resize(({1},{1}), PIL.Image.Resampling.NEAREST)'.format(core_id, core_size-4))
                     rod = self.cores_setting[core_id]['rod']
                     if rod != None:
-                        if rod['active']: exec('rodTex = {0}topimg.resize(({1},{1}), PIL.Image.NEAREST)'.format(rod['id'], core_size-4))
-                        else: exec('rodTex = {0}top_closeimg.resize(({1},{1}), PIL.Image.NEAREST)'.format(rod['id'], core_size-4))
+                        if rod['active']: exec('rodTex = {0}topimg.resize(({1},{1}), PIL.Image.Resampling.NEAREST)'.format(rod['id'], core_size-4))
+                        else: exec('rodTex = {0}top_closeimg.resize(({1},{1}), PIL.Image.Resampling.NEAREST)'.format(rod['id'], core_size-4))
                         exec('{0}_cell0Tex = PIL.Image.alpha_composite({0}_cell0Tex, rodTex)'.format(core_id))
                     exec('{0}_cell0TexTk = PIL.ImageTk.PhotoImage({0}_cell0Tex)'.format(core_id))
                     exec('self.{0}_cell0.itemconfigure(self.{0}_cell0_image, image={0}_cell0TexTk)'.format(core_id))
@@ -942,12 +965,12 @@ class main:
                     self.form_core_cell((i,j), True)
                 else:
                     for k in range(4):
-                        exec('{0}_cell{1}Tex = core2x2top_partimg.resize(({2},{2}), PIL.Image.NEAREST)'.format(core_id, k, core_size//2-2))
+                        exec('{0}_cell{1}Tex = core2x2top_partimg.resize(({2},{2}), PIL.Image.Resampling.NEAREST)'.format(core_id, k, core_size//2-2))
                         rod = self.cores_setting[core_id]['rod'][k]
                         if rod != None:
                             if rod['active']: exec('rodTex_part = {0}topimg.crop((4,4,12,12))'.format(rod['id']))
                             else: exec('rodTex_part = {0}top_closeimg.crop((4,4,12,12))'.format(rod['id']))
-                            exec('rodTex_part = rodTex_part.resize(({0},{0}), PIL.Image.NEAREST)'.format(core_size//2-2))
+                            exec('rodTex_part = rodTex_part.resize(({0},{0}), PIL.Image.Resampling.NEAREST)'.format(core_size//2-2))
                             exec('{0}_cell{1}Tex = PIL.Image.alpha_composite({0}_cell{1}Tex, rodTex_part)'.format(core_id, k))
                         exec('{0}_cell{1}TexTk = PIL.ImageTk.PhotoImage({0}_cell{1}Tex)'.format(core_id, k))
                         exec('self.{0}_cell{1}.itemconfigure(self.{0}_cell{1}_image, image={0}_cell{1}TexTk)'.format(core_id, k))
@@ -955,12 +978,12 @@ class main:
                         self.set_core_inf((i,j,k))
         else:
             if basetype == 'core2x2' and k != -1:
-                exec('{0}_cell{1}Tex = core2x2top_partimg.resize(({2},{2}), PIL.Image.NEAREST)'.format(core_id, k, core_size//2-2))
+                exec('{0}_cell{1}Tex = core2x2top_partimg.resize(({2},{2}), PIL.Image.Resampling.NEAREST)'.format(core_id, k, core_size//2-2))
                 rod = self.cores_setting[core_id]['rod'][k]
                 if rod != None:
                     if rod['active']: exec('rodTex_part = {0}topimg.crop((4,4,12,12))'.format(rod['id']))
                     else: exec('rodTex_part = {0}top_closeimg.crop((4,4,12,12))'.format(rod['id']))
-                    exec('rodTex_part = rodTex_part.resize(({0},{0}), PIL.Image.NEAREST)'.format(core_size//2-2))
+                    exec('rodTex_part = rodTex_part.resize(({0},{0}), PIL.Image.Resampling.NEAREST)'.format(core_size//2-2))
                     exec('{0}_cell{1}Tex = PIL.Image.alpha_composite({0}_cell{1}Tex, rodTex_part)'.format(core_id, k))
                 exec('{0}_cell{1}TexTk = PIL.ImageTk.PhotoImage({0}_cell{1}Tex)'.format(core_id, k))
                 exec('self.{0}_cell{1}.itemconfigure(self.{0}_cell{1}_image, image={0}_cell{1}TexTk)'.format(core_id, k))
@@ -1383,7 +1406,7 @@ class main:
                         exec('self.f = round({})'.format(coolant['factor'].format(all_rods[rod['id']]['detail']['factor'])))
                         f = 1/self.f
                         n = rod['neutron']
-                        En = ceil((e + ((n-s)*f))/2)
+                        En = ceil(max((e + ((n-s)*f))/2, 0))
             return En, 'core1x1', s
         elif self.cores_setting[core_id]['base'] == 'core2x2':
             En = [None, None, None, None]
@@ -1400,7 +1423,7 @@ class main:
                             exec('self.f = round({})'.format(coolant['factor'].format(all_rods[rod['id']]['detail']['factor'])))
                             f = 1/self.f
                             n = rod['neutron']
-                            En[k] = ceil(e + ((n-s[k])*f))
+                            En[k] = ceil(max(e + ((n-s[k])*f), 0))
             return En, 'core2x2', s
         elif self.cores_setting[core_id]['base'] == None:
             return None, None, None
@@ -1417,26 +1440,30 @@ class main:
                 rod = self.cores_setting[core_id]['rod']
                 if rod != None and rod['active']:
                     rod_type = all_rods[rod['id']]['type']
-                    if (rod_type == 'fuel_rod' and (not rod['depleted'])) or rod_type == 'absorb_rod' or rod_type == 'breed_rod':
-                        self.cores_setting[core_id]['rod'][get_neutron_str] += neutron_num
+                    if (rod_type == 'fuel_rod' and (not rod['depleted'])) or rod_type == 'absorb_rod' or rod_type == 'enrich_rod':
+                        rod[get_neutron_str] += neutron_num
+                    elif rod_type == 'breed_rod':
+                        rod[get_neutron_str] += max(neutron_num - rod['loss'], 0)
                     elif rod_type == 'reflect_rod':
                         if ok == -1: self.cores_setting[ocore_id]['rod'][get_neutron_str] += neutron_num
                         else:        self.cores_setting[ocore_id]['rod'][ok][get_neutron_str] += neutron_num
                     elif rod_type == 'moderate_rod' and is_moderated:
-                        if ok == -1: self.cores_setting[ocore_id]['rod']['get_neutron_moderated'] += neutron_num*self.cores_setting[core_id]['rod']['multi']
-                        else:        self.cores_setting[ocore_id]['rod'][ok]['get_neutron_moderated'] += neutron_num*self.cores_setting[core_id]['rod']['multi']
+                        if ok == -1: self.cores_setting[ocore_id]['rod']['get_neutron_moderated'] += neutron_num*rod['multi']
+                        else:        self.cores_setting[ocore_id]['rod'][ok]['get_neutron_moderated'] += neutron_num*rod['multi']
             elif self.cores_setting[core_id]['base'] == 'core2x2':
                 rod = self.cores_setting[core_id]['rod'][k]
                 if rod != None and rod['active']:
                     rod_type = all_rods[rod['id']]['type']
-                    if (rod_type == 'fuel_rod' and (not rod['depleted'])) or rod_type == 'absorb_rod' or rod_type == 'breed_rod':
-                        self.cores_setting[core_id]['rod'][k][get_neutron_str] += neutron_num
+                    if (rod_type == 'fuel_rod' and (not rod['depleted'])) or rod_type == 'absorb_rod' or rod_type == 'enrich_rod':
+                        rod[get_neutron_str] += neutron_num
+                    elif rod_type == 'breed_rod':
+                        rod[get_neutron_str] += max(neutron_num - rod['loss'], 0)
                     elif rod_type == 'reflect_rod':
                         if ok == -1: self.cores_setting[ocore_id]['rod'][get_neutron_str] += neutron_num
                         else:        self.cores_setting[ocore_id]['rod'][ok][get_neutron_str] += neutron_num
                     elif rod_type == 'moderate_rod' and is_moderated:
-                        if ok == -1: self.cores_setting[ocore_id]['rod']['get_neutron_moderated'] += neutron_num*self.cores_setting[core_id]['rod'][k]['multi']
-                        else:        self.cores_setting[ocore_id]['rod'][ok]['get_neutron_moderated'] += neutron_num*self.cores_setting[core_id]['rod'][k]['multi']
+                        if ok == -1: self.cores_setting[ocore_id]['rod']['get_neutron_moderated'] += neutron_num*rod['multi']
+                        else:        self.cores_setting[ocore_id]['rod'][ok]['get_neutron_moderated'] += neutron_num*rod['multi']
 
     # 切换
     def switch_neutron(self, posij):
@@ -1448,46 +1475,46 @@ class main:
             if rod != None and rod['active']:
                 rod_type = all_rods[rod['id']]['type']
                 if rod_type == 'fuel_rod' and (not rod['depleted']):
-                    get_neutron_num = self.cores_setting[core_id]['rod']['get_neutron']
-                    get_neutron_moderated_num = self.cores_setting[core_id]['rod']['get_neutron_moderated']
-                    self.cores_setting[core_id]['rod']['neutron'] = get_neutron_num + get_neutron_moderated_num
-                    self.cores_setting[core_id]['rod']['get_neutron'] = 0
-                    self.cores_setting[core_id]['rod']['get_neutron_moderated'] = 0
-                elif rod_type == 'absorb_rod':
-                    get_neutron_num = self.cores_setting[core_id]['rod']['get_neutron']
-                    get_neutron_moderated_num = self.cores_setting[core_id]['rod']['get_neutron_moderated']
-                    self.cores_setting[core_id]['rod']['neutron'] = get_neutron_num + get_neutron_moderated_num
-                    self.cores_setting[core_id]['rod']['get_neutron'] = 0
-                    self.cores_setting[core_id]['rod']['get_neutron_moderated'] = 0
+                    get_neutron_num = rod['get_neutron']
+                    get_neutron_moderated_num = rod['get_neutron_moderated']
+                    rod['neutron'] = get_neutron_num + get_neutron_moderated_num
+                    rod['get_neutron'] = 0
+                    rod['get_neutron_moderated'] = 0
+                elif rod_type == 'absorb_rod' or rod_type == 'enrich_rod':
+                    get_neutron_num = rod['get_neutron']
+                    get_neutron_moderated_num = rod['get_neutron_moderated']
+                    rod['neutron'] = get_neutron_num + get_neutron_moderated_num
+                    rod['get_neutron'] = 0
+                    rod['get_neutron_moderated'] = 0
                 elif rod_type == 'breed_rod':
-                    get_neutron_num = self.cores_setting[core_id]['rod']['get_neutron']
-                    self.cores_setting[core_id]['rod']['get_neutron'] = 0
-                    self.cores_setting[core_id]['rod']['get_neutron_moderated'] = 0
-                    self.cores_setting[core_id]['rod']['neutron'] = get_neutron_num
-                    self.cores_setting[core_id]['rod']['truning_speed'] = ceil(get_neutron_num * pow(1.5,(get_neutron_num/500)))
+                    get_neutron_num = rod['get_neutron']
+                    rod['get_neutron'] = 0
+                    rod['get_neutron_moderated'] = 0
+                    rod['neutron'] = get_neutron_num
+                    rod['truning_speed'] = get_neutron_num
         elif self.cores_setting[core_id]['base'] == 'core2x2':
             for k in range(4):
                 rod = self.cores_setting[core_id]['rod'][k]
                 if rod != None and rod['active']:
                     rod_type = all_rods[rod['id']]['type']
                     if rod_type == 'fuel_rod' and (not rod['depleted']):
-                        get_neutron_num = self.cores_setting[core_id]['rod'][k]['get_neutron']
-                        get_neutron_moderated_num = self.cores_setting[core_id]['rod'][k]['get_neutron_moderated']
-                        self.cores_setting[core_id]['rod'][k]['neutron'] = get_neutron_num + get_neutron_moderated_num
-                        self.cores_setting[core_id]['rod'][k]['get_neutron'] = 0
-                        self.cores_setting[core_id]['rod'][k]['get_neutron_moderated'] = 0
-                    elif rod_type == 'absorb_rod':
-                        get_neutron_num = self.cores_setting[core_id]['rod'][k]['get_neutron']
-                        get_neutron_moderated_num = self.cores_setting[core_id]['rod'][k]['get_neutron_moderated']
-                        self.cores_setting[core_id]['rod'][k]['neutron'] = get_neutron_num + get_neutron_moderated_num
-                        self.cores_setting[core_id]['rod'][k]['get_neutron'] = 0
-                        self.cores_setting[core_id]['rod'][k]['get_neutron_moderated'] = 0
+                        get_neutron_num = rod['get_neutron']
+                        get_neutron_moderated_num = rod['get_neutron_moderated']
+                        rod['neutron'] = get_neutron_num + get_neutron_moderated_num
+                        rod['get_neutron'] = 0
+                        rod['get_neutron_moderated'] = 0
+                    elif rod_type == 'absorb_rod' or rod_type == 'enrich_rod':
+                        get_neutron_num = rod['get_neutron']
+                        get_neutron_moderated_num = rod['get_neutron_moderated']
+                        rod['neutron'] = get_neutron_num + get_neutron_moderated_num
+                        rod['get_neutron'] = 0
+                        rod['get_neutron_moderated'] = 0
                     elif rod_type == 'breed_rod':
-                        get_neutron_num = self.cores_setting[core_id]['rod'][k]['get_neutron']
-                        self.cores_setting[core_id]['rod'][k]['get_neutron'] = 0
-                        self.cores_setting[core_id]['rod'][k]['get_neutron_moderated'] = 0
-                        self.cores_setting[core_id]['rod'][k]['neutron'] = get_neutron_num
-                        self.cores_setting[core_id]['rod'][k]['truning_speed'] = ceil(get_neutron_num * pow(1.5,(get_neutron_num/500)))
+                        get_neutron_num = rod['get_neutron']
+                        rod['get_neutron'] = 0
+                        rod['get_neutron_moderated'] = 0
+                        rod['neutron'] = get_neutron_num
+                        rod['truning_speed'] = get_neutron_num
 
     #流体部分
     def cal_fluid(self, posij):
@@ -1503,7 +1530,7 @@ class main:
                     fluid = ceil(rod['neutron'] * coolant['fluid_eff']) / coolant['heat_capacity']
                 elif rod_type == 'absorb_rod':
                     fluid = ceil(rod['neutron']*2 * coolant['fluid_eff']) / coolant['heat_capacity']
-                elif rod_type == 'breed_rod':
+                elif rod_type == 'breed_rod' or rod_type == 'enrich_rod':
                     fluid = ceil(rod['neutron']/2 * coolant['fluid_eff']) / coolant['heat_capacity']
         elif self.cores_setting[core_id]['base'] == 'core2x2':
             coolant = all_coolant[self.cores_setting[core_id]['coolant']]
@@ -1515,7 +1542,7 @@ class main:
                         fluid += ceil(rod['neutron'] * coolant['fluid_eff']) / coolant['heat_capacity']
                     elif rod_type == 'absorb_rod':
                         fluid += ceil(rod['neutron']*2 * coolant['fluid_eff']) / coolant['heat_capacity']
-                    elif rod_type == 'breed_rod':
+                    elif rod_type == 'breed_rod' or rod_type == 'enrich_rod':
                         fluid += ceil(rod['neutron']/2 * coolant['fluid_eff']) / coolant['heat_capacity']
         self.cores_setting[core_id]['fluid'] = fluid
 
@@ -1546,7 +1573,7 @@ class main:
                     heat = ceil(rod['neutron'] * coolant['utilization'])
                 elif rod_type == 'absorb_rod':
                     heat = ceil(rod['neutron'] * 2 * coolant['utilization'])
-                elif rod_type == 'breed_rod':
+                elif rod_type == 'breed_rod' or rod_type == 'enrich_rod':
                     heat = ceil((rod['neutron'] / 2) * coolant['utilization'])
         elif self.cores_setting[core_id]['base'] == 'core2x2':
             coolant = all_coolant[self.cores_setting[core_id]['coolant']]
@@ -1558,7 +1585,7 @@ class main:
                         heat += ceil(rod['neutron'] * coolant['utilization'])
                     elif rod_type == 'absorb_rod':
                         heat += ceil(rod['neutron'] * 2 * coolant['utilization'])
-                    elif rod_type == 'breed_rod':
+                    elif rod_type == 'breed_rod' or rod_type == 'enrich_rod':
                         heat += ceil((rod['neutron'] / 2) * coolant['utilization'])
         self.cores_setting[core_id]['heat'] = heat
 
@@ -1805,7 +1832,7 @@ class main:
         self.point_color = ['\'#d3d3d3\'', '\'#414141\'']
         self.clr_time_graph(self.tick)
         self.start_b.grid_forget()
-        self.pause_b.grid(row=3, column=5, padx=5, pady=5)
+        self.pause_b.grid(row=4, column=6, padx=5, pady=5)
         ##存储最原始core_setting
         if self.cores_setting['tttime']==0:
             self.orig_cores_setting = deepcopy(self.cores_setting)
@@ -1855,14 +1882,15 @@ class main:
                             self.get_neutron((i,j-1,3), (i,j,-1), En)
                             self.get_neutron((i,j+1,0), (i,j,-1), En)
                             self.get_neutron((i,j+1,2), (i,j,-1), En)
-                        if s != None and En != None:
-                            fn = (En * 8) + s
+
+                        n = self.cores_setting[core_id]['rod']['neutron']
+                        if n != None and En != None and s != None:
                             maxn = round(all_rods[self.cores_setting[core_id]['rod']['id']]['detail']['maximum']*coolant['maximum'])
-                            self.cores_setting[core_id]['rod']['utilization_N'] = fn/maxn
-                            if fn > maxn:
-                                self.cores_setting[core_id]['rod']['life_multi'] = 4 * (fn/maxn)
+                            self.cores_setting[core_id]['rod']['utilization_N'] = n/maxn
+                            if n > maxn:
+                                self.cores_setting[core_id]['rod']['life_multi'] = 4 * (n/maxn)
                                 self.cores_setting[core_id]['rod']['overloaded'] = True
-                                if fn > maxn * 2:
+                                if n > maxn * 2:
                                     self.cores_setting[core_id]['rod']['overloaded2'] = True
                                 else:
                                     self.cores_setting[core_id]['rod']['overloaded2'] = False
@@ -1895,14 +1923,15 @@ class main:
                                     self.get_neutron((i+1,j,1), (i,j,k), En[k])
                                     self.get_neutron((i,j,  2), (i,j,k), En[k])
                                     self.get_neutron((i,j+1,2), (i,j,k), En[k])
-                            if s[k] != None and En[k] != None:
-                                fn = (En[k] * 4) + s[k]
+
+                            n = self.cores_setting[core_id]['rod'][k]['neutron']
+                            if n != None and En != None and s != None:
                                 maxn = round(all_rods[self.cores_setting[core_id]['rod'][k]['id']]['detail']['maximum']*coolant['maximum'])
-                                self.cores_setting[core_id]['rod'][k]['utilization_N'] = fn/maxn
-                                if fn > maxn:
-                                    self.cores_setting[core_id]['rod'][k]['life_multi'] = 4 * (fn/maxn)
+                                self.cores_setting[core_id]['rod'][k]['utilization_N'] = n/maxn
+                                if n > maxn:
+                                    self.cores_setting[core_id]['rod'][k]['life_multi'] = 4 * (n/maxn)
                                     self.cores_setting[core_id]['rod'][k]['overloaded'] = True
-                                    if fn > maxn * 2:
+                                    if n > maxn * 2:
                                         self.cores_setting[core_id]['rod'][k]['overloaded2'] = True
                                     else:
                                         self.cores_setting[core_id]['rod'][k]['overloaded2'] = False
@@ -1927,14 +1956,14 @@ class main:
                             self.get_neutron((i,j-1,3), (i,j,-1), En, True)
                             self.get_neutron((i,j+1,0), (i,j,-1), En, True)
                             self.get_neutron((i,j+1,2), (i,j,-1), En, True)
-                        if s != None and En != None:
-                            fn = (En * 8) + s
+                        n = self.cores_setting[core_id]['rod']['neutron']
+                        if n != None and En != None and s != None:
                             maxn = round(all_rods[self.cores_setting[core_id]['rod']['id']]['detail']['maximum']*coolant['maximum'])
-                            self.cores_setting[core_id]['rod']['utilization_N'] = fn/maxn
-                            if fn > maxn:
-                                self.cores_setting[core_id]['rod']['life_multi'] = 4 * (fn/maxn) * 4
+                            self.cores_setting[core_id]['rod']['utilization_N'] = n/maxn
+                            if n > maxn:
+                                self.cores_setting[core_id]['rod']['life_multi'] = 4 * (n/maxn) * 4
                                 self.cores_setting[core_id]['rod']['overloaded'] = True
-                                if fn > maxn * 2:
+                                if n > maxn * 2:
                                     self.cores_setting[core_id]['rod']['overloaded2'] = True
                                 else:
                                     self.cores_setting[core_id]['rod']['overloaded2'] = False
@@ -1967,14 +1996,14 @@ class main:
                                     self.get_neutron((i+1,j,1), (i,j,k), En[k], True)
                                     self.get_neutron((i,j,  2), (i,j,k), En[k], True)
                                     self.get_neutron((i,j+1,2), (i,j,k), En[k], True)
-                            if s[k] != None and En[k] != None:
-                                fn = (En[k] * 4) + s[k]
+                            n = self.cores_setting[core_id]['rod'][k]['neutron']
+                            if n != None and En != None and s != None:
                                 maxn = round(all_rods[self.cores_setting[core_id]['rod'][k]['id']]['detail']['maximum']*coolant['maximum'])
-                                self.cores_setting[core_id]['rod'][k]['utilization_N'] = fn/maxn
-                                if fn > maxn:
-                                    self.cores_setting[core_id]['rod'][k]['life_multi'] = 4 * (fn/maxn) * 4
+                                self.cores_setting[core_id]['rod'][k]['utilization_N'] = n/maxn
+                                if n > maxn:
+                                    self.cores_setting[core_id]['rod'][k]['life_multi'] = 4 * (n/maxn) * 4
                                     self.cores_setting[core_id]['rod'][k]['overloaded'] = True
-                                    if fn > maxn * 2:
+                                    if n > maxn * 2:
                                         self.cores_setting[core_id]['rod'][k]['overloaded2'] = True
                                     else:
                                         self.cores_setting[core_id]['rod'][k]['overloaded2'] = False
@@ -2095,7 +2124,7 @@ class main:
             if self.tick >= self.timegraph_setting['max_time'] and self.is_start:
                 self.is_start = False
                 self.pause_b.grid_forget()
-                self.reset_b.grid(row=3, column=5, padx=5, pady=5)
+                self.reset_b.grid(row=4, column=6, padx=5, pady=5)
                 ###开始预测
                 self.simwin.after(4, predict)
             elif self.pause_mid and self.is_start:
@@ -2104,14 +2133,14 @@ class main:
                 self.input_tick = self.tick
                 self.draw_all(reform=False, draw=True, dis=True)
                 self.pause_b.grid_forget()
-                self.start_b.grid(row=3, column=5, padx=5, pady=5)
+                self.start_b.grid(row=4, column=6, padx=5, pady=5)
             elif self.pause_mid_r and self.is_start:
                 self.is_start = False
                 #停止后
                 self.input_tick = self.tick
                 self.draw_all(reform=False, draw=True, dis=True)
                 self.pause_b.grid_forget()
-                self.reset_b.grid(row=3, column=5, padx=5, pady=5)
+                self.reset_b.grid(row=4, column=6, padx=5, pady=5)
 
             #remeber
             self.cores_setting['tttime'] += 1
@@ -2126,7 +2155,7 @@ class main:
         self.is_start = False
         self.draw_all(reform=False, draw=True, dis=True)
         self.pause_b.grid_forget()
-        self.start_b.grid(row=3, column=5, padx=5, pady=5)
+        self.start_b.grid(row=4, column=6, padx=5, pady=5)
 
     def stop_sim(self, input_tick):
         self.pause_sim()
@@ -2136,7 +2165,7 @@ class main:
         self.timegraph_setting['max_heat'] = self.get_max_heat()*2 + 1
         self.updeta_ttinf()
         self.reset_b.grid_forget()
-        self.start_b.grid(row=3, column=5, padx=5, pady=5)
+        self.start_b.grid(row=4, column=6, padx=5, pady=5)
 
     def reset_sim(self):
         self.is_start = False
@@ -2147,7 +2176,7 @@ class main:
         self.timegraph_setting['max_heat'] = self.get_max_heat()*2 + 1
         self.updeta_ttinf()
         self.reset_b.grid_forget()
-        self.start_b.grid(row=3, column=5, padx=5, pady=5)
+        self.start_b.grid(row=4, column=6, padx=5, pady=5)
 
     ####切换反应堆状态
     def change_time(self, event):
@@ -2168,9 +2197,9 @@ class main:
             self.reset_b.grid_forget()
             self.start_b.grid_forget()
             if sel_time_s < self.timegraph_setting['max_time']//20:
-                self.start_b.grid(row=3, column=5, padx=5, pady=5)
+                self.start_b.grid(row=4, column=6, padx=5, pady=5)
             else:
-                self.reset_b.grid(row=3, column=5, padx=5, pady=5)
+                self.reset_b.grid(row=4, column=6, padx=5, pady=5)
             
 ######################################
     def debug(self, event):

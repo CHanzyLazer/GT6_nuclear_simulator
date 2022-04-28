@@ -19,6 +19,7 @@
 pip install pillow
 pip install mouse==0.7.0
 pip install pyyaml
+pip install ruamel.yaml
 ```
 运行 `main.py` 即可
 
