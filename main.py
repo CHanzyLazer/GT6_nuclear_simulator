@@ -6,9 +6,8 @@ from math import floor, ceil, pow
 import PIL.ImageTk
 import PIL.Image
 import PIL.ImageDraw
-from win32api import GetCursorPos,GetSystemMetrics
+from win32api import GetCursorPos, GetSystemMetrics
 from copy import deepcopy
-#test git
 
 
 #数据和信息

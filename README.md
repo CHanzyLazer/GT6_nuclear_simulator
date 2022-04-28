@@ -11,3 +11,12 @@
 
 # 下载
 直接在[Releases](https://github.com/CHanzyLazer/GT6_nuclear_simulator/releases)下载
+
+# 代码
+需要前置包
+```
+pip install pillow
+pip install pywin32
+pip install pyyaml
+```
+运行 `main.py` 即可
