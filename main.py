@@ -455,6 +455,7 @@ class main:
                     self.cores_setting[core_id]['rod'][k]['utilization_N']=0
                 elif rod_type == 'breed_rod':
                     self.cores_setting[core_id]['rod'][k]['needed']=all_rods[rod_id]['detail']['needed']
+                    self.cores_setting[core_id]['rod'][k]['loss']=all_rods[rod_id]['detail']['loss']
                     self.cores_setting[core_id]['rod'][k]['neutron']=0
                     self.cores_setting[core_id]['rod'][k]['get_neutron']=0
                     self.cores_setting[core_id]['rod'][k]['get_neutron_moderated']=0
@@ -1882,9 +1883,8 @@ class main:
                             self.get_neutron((i,j-1,3), (i,j,-1), En)
                             self.get_neutron((i,j+1,0), (i,j,-1), En)
                             self.get_neutron((i,j+1,2), (i,j,-1), En)
-
-                        n = self.cores_setting[core_id]['rod']['neutron']
-                        if n != None and En != None and s != None:
+                        if En != None and s != None:
+                            n = self.cores_setting[core_id]['rod']['neutron']
                             maxn = round(all_rods[self.cores_setting[core_id]['rod']['id']]['detail']['maximum']*coolant['maximum'])
                             self.cores_setting[core_id]['rod']['utilization_N'] = n/maxn
                             if n > maxn:
@@ -1922,10 +1922,9 @@ class main:
                                     self.get_neutron((i,j,  1), (i,j,k), En[k])
                                     self.get_neutron((i+1,j,1), (i,j,k), En[k])
                                     self.get_neutron((i,j,  2), (i,j,k), En[k])
-                                    self.get_neutron((i,j+1,2), (i,j,k), En[k])
-
-                            n = self.cores_setting[core_id]['rod'][k]['neutron']
-                            if n != None and En != None and s != None:
+                                    self.get_neutron((i,j+1,2), (i,j,k), En[k])                           
+                            if En[k] != None and s[k] != None:
+                                n = self.cores_setting[core_id]['rod'][k]['neutron']
                                 maxn = round(all_rods[self.cores_setting[core_id]['rod'][k]['id']]['detail']['maximum']*coolant['maximum'])
                                 self.cores_setting[core_id]['rod'][k]['utilization_N'] = n/maxn
                                 if n > maxn:
@@ -1956,8 +1955,8 @@ class main:
                             self.get_neutron((i,j-1,3), (i,j,-1), En, True)
                             self.get_neutron((i,j+1,0), (i,j,-1), En, True)
                             self.get_neutron((i,j+1,2), (i,j,-1), En, True)
-                        n = self.cores_setting[core_id]['rod']['neutron']
-                        if n != None and En != None and s != None:
+                        if En != None and s != None:
+                            n = self.cores_setting[core_id]['rod']['neutron']
                             maxn = round(all_rods[self.cores_setting[core_id]['rod']['id']]['detail']['maximum']*coolant['maximum'])
                             self.cores_setting[core_id]['rod']['utilization_N'] = n/maxn
                             if n > maxn:
@@ -1996,8 +1995,8 @@ class main:
                                     self.get_neutron((i+1,j,1), (i,j,k), En[k], True)
                                     self.get_neutron((i,j,  2), (i,j,k), En[k], True)
                                     self.get_neutron((i,j+1,2), (i,j,k), En[k], True)
-                            n = self.cores_setting[core_id]['rod'][k]['neutron']
-                            if n != None and En != None and s != None:
+                            if En[k] != None and s[k] != None:
+                                n = self.cores_setting[core_id]['rod'][k]['neutron']
                                 maxn = round(all_rods[self.cores_setting[core_id]['rod'][k]['id']]['detail']['maximum']*coolant['maximum'])
                                 self.cores_setting[core_id]['rod'][k]['utilization_N'] = n/maxn
                                 if n > maxn:
