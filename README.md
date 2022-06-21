@@ -32,3 +32,6 @@ pip install pyinstaller
 ```shell
 pyinstaller -F -w -i textures\nuclearsim.ico main.py
 ```
+
+# License
+This software is licensed under the [MIT License](LICENSE).
