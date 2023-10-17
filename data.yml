@@ -146,7 +146,7 @@ infomation:
   molten_lithium_chlorid_out: 热熔融氯化锂
   molten_lithium_chlorid_rod: ''
   molten_lithium_chlorid_core: ''
-  molten_thorium_salt: "熔融钍盐\n\n熔融钍盐冷却剂, 有四倍的最高发射中子数, 但不会转换成对应的热冷却剂\n每吸收 10000HU 热量,\
+  molten_thorium_salt: "熔融钍盐\n\n熔融钍盐冷却剂, 有四倍的最高发射中子数, 但不会转换成对应的热冷却剂\n每吸收 2,560,000HU 热量,\
     \ 将 1L熔融钍盐 转换成 1L熔融氯化锂"
   molten_thorium_salt_name: 熔融钍盐
   molten_thorium_salt_out: 熔融氯化锂
