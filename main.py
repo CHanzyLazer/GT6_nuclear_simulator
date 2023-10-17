@@ -114,7 +114,7 @@ class main:
 
         self.simwin = Tk()
         self.simwin.title('nuclearSimulator-{}'.format(version))
-        self.simwin.iconbitmap('textures/nuclearsim.ico') 
+        self.simwin.iconbitmap('textures/nuclearsim.ico')
         self.simwin.geometry('1640x670')
         self.simwin["background"] = '#aaaaaa'
         self.simwin.resizable(width=False, height=False)
@@ -154,7 +154,7 @@ class main:
         self.rod_frame.grid(row=0, column=2, rowspan=3, columnspan=2, padx=5, pady=5)
         ##燃料棒
         self.rodkeys = list(all_rods.keys())
-        col_nums = [3, 5, 5, 3, 3, 3]
+        col_nums = [3, 5, 5, 3, 4, 4]
         i,j = 0,0
         for rod_id in self.rodkeys:
             ###绘图
@@ -212,6 +212,9 @@ class main:
         self.core1x1_image=self.core1x1.create_image(0, 0, anchor=NW, image=core1x1TexTk)
         self.core1x1TexTk = core1x1TexTk # keep img not be deleted
         self.core1x1.grid(row=0, column=0, padx=2, pady=2)
+
+        self.timeCount = 1  # 用于记录图像拉伸倍数，在核反应堆超临界时用到
+
         ###添加触发
         self.core1x1.bind('<Enter>',self.functionAdaptor(self.Balloon_show, msg=infomation['core1x1']))
         self.core1x1.bind('<Leave>',self.Balloon_destroy)
@@ -278,7 +281,7 @@ class main:
         self.form_core()
 
         ######################
-        self.tick = 0 
+        self.tick = 0
         self.input_tick = 0 #时间
         #开始模拟键
         self.is_start = False
@@ -322,6 +325,11 @@ class main:
         ##效率百分百横线
         self.u100line = self.time_graph.create_line(0,300/2,580,300/2,fill='#ff8888', dash=(4, 4))
         self.u100text = self.time_graph.create_text(7,300/2-2,text='', anchor=SW, font=font_normal,fill='#9e4545')
+
+        # 测试使用
+        # self.time_graph.delete(self.u100line)
+        # self.u100line = self.time_graph.create_line(0, 100 / 2, 580, 100 / 2, fill='#ff8888', dash=(4, 4))
+
         ##选择时间线
         self.selline = self.time_graph.create_line(0,0,0,300,fill='#000000')
         self.seltext = self.time_graph.create_text(7,300/2-2,text='', anchor=SW, font=font_normal,fill='#9e4545')
@@ -357,7 +365,7 @@ class main:
             exec('self.fluid_{0} = Label(self.data_frame1, fg=None, bg=\'#aaaaaa\', justify=LEFT, font=font_small)'.format(coolant_id))
 
         self.max_heat = 0
-        
+
         self.updeta_ttinf()
 
         #提示框
@@ -727,7 +735,7 @@ class main:
                     self.form_core_cell((i,j), False)
                 #改变信息
                 self.change_core_dis((i,j))
-    
+
     def form_core_cell(self, posij, quarter=False):
         i, j = posij
         core_size = 600//self.core_num
@@ -779,7 +787,7 @@ class main:
                 exec('{0}_cell0TexTk = PIL.ImageTk.PhotoImage({0}_cell0Tex)'.format(core_id))
                 exec('self.{0}_cell0_image=self.{0}_cell0.create_image(0,0,anchor=NW,image={0}_cell0TexTk)'.format(core_id))
                 exec('self.{0}_cell0TexTk = {0}_cell0TexTk'.format(core_id)) # keep img not be deleted
-                
+
             #信息
             self.form_core_dis((i,j,-1), core_size)
             #添加触发
@@ -843,7 +851,7 @@ class main:
                 else: rod_inf += '\n{}'.format(infomation['core_com13'])
             elif all_rods[rod['id']]['type'] == 'breed_rod':
                 rod_inf += '\n{}'.format(infomation['core_com3'].format(rod['needed']))
-                if rod['active']: 
+                if rod['active']:
                     rod_inf += '\n{}'.format(infomation['core_com1'].format(rod['neutron']))
                     rod_inf += '\n{}'.format(infomation['core_com12'].format(rod['truning_speed']))
                 else: rod_inf += '\n{}'.format(infomation['core_com13'])
@@ -1141,7 +1149,7 @@ class main:
                         if self.display_setting['names']:
                             coolant = all_coolant[self.cores_setting[core_id]['coolant']]
                             exec('self.{0}_cell{1}.itemconfigure(self.{0}_cell{1}_nameCtext, text=coolant[\'name\'],fill=coolant[\'name_col\'])'.format(core_id,k))
-                        else: 
+                        else:
                             exec('self.{0}_cell{1}.itemconfigure(self.{0}_cell{1}_nameCtext, text=\'\')'.format(core_id,k))
                     if self.display_setting['names']:
                         if rod != None:
@@ -1664,6 +1672,37 @@ class main:
             try: exec('self.time_graph.delete(self.timepoint{})'.format(time_s))
             except: pass
 
+        # 此步骤是后加的，目的是为了超临界反应中途开始的时候重新规范函数图像使得其更加可观
+        # 只有中途反应并且上限有扩张才会进入此函数
+        if tick > 0 and self.timeCount > 1:
+            max_heat = 0
+            setting_max_heat = self.timegraph_setting['max_heat'] - 1
+            should_shrink = 1
+            # 循环比较以获得之前最高的热值
+            for time_s in range(tick//20):
+                if eval("self.cores_setting_{}['heat']".format(time_s)) > max_heat:
+                    max_heat = eval("self.cores_setting_{}['heat']".format(time_s))
+            # 循环计算可供缩减的倍数
+            while max_heat < setting_max_heat and should_shrink < self.timeCount:
+                setting_max_heat /= 2
+                should_shrink *= 2
+            # 重新绘图
+            # 将图表纵坐标缩减
+            self.timegraph_setting['max_heat'] = int((self.timegraph_setting['max_heat'] - 1) / should_shrink + 1)
+            self.timeCount /= should_shrink
+            # 移动标准放热辅助线
+            self.time_graph.coords(self.u100line, 0, 300 - 300 / 2 / self.timeCount, 580,
+                                   300 - 300 / 2 / self.timeCount)
+            # 移动标准放热说明字段
+            self.time_graph.coords(self.u100text, 7, 300 - 300 / 2 / self.timeCount - 2)
+
+            # 重新绘点
+            for i in range(self.tick // 20):
+                x = (i * 20 / self.timegraph_setting['max_time']) * 500
+                heat = eval("self.cores_setting_{}['heat']".format(i))
+                y = (1 - heat / self.timegraph_setting['max_heat']) * 300
+                exec("self.time_graph.coords(self.timepoint{0},{1},{2}-5,{1}+5,{2})".format(i, x, y))
+
     # 统计信息部分
     def updeta_ttinf(self):
         self.data_ttheat['text'] = infomation['ttinf0'].format(self.cores_setting['ttheat'])
@@ -1821,6 +1860,7 @@ class main:
                 else:
                     exec('self.fluid_{0}[\'text\'] = \'\''.format(coolant_id))
                     exec('self.fluid_{0}.grid_forget()'.format(coolant_id))
+
             #停止后
             self.input_tick = self.tick
             self.draw_all(reform=False, draw=True, dis=True)
@@ -1856,10 +1896,40 @@ class main:
                     elif self.cores_setting[core_id]['base'] == 'core2x2':
                         for k in range(4): self.set_core_inf((i,j,k))
             ###时间轴部分
+
+            heat = self.cores_setting['heat']
+
+            # 检测当前放热是否超出画布上界
+            if heat >= self.timegraph_setting['max_heat']:
+                # 将图表纵坐标拉伸两倍
+                self.timegraph_setting['max_heat'] = self.timegraph_setting['max_heat'] * 2 -1
+                self.timeCount *= 2
+                # 移动标准放热辅助线
+                self.time_graph.coords(self.u100line,0, 300 - 300 / 2 / self.timeCount, 580, 300 - 300 / 2 / self.timeCount)
+                # 移动标准放热说明字段
+                self.time_graph.coords(self.u100text,7, 300 - 300 / 2 / self.timeCount - 2)
+
+                # 删除所有原先的绘图点
+                # for i in range(self.tick // 20 ):
+                #     exec("self.time_graph.delete(self.timepoint{})".format(i))
+                # 重新绘图
+                for i in range(self.tick // 20 ):
+                    x = ( i * 20 / self.timegraph_setting['max_time'])*500
+                    heat = eval("self.cores_setting_{}['heat']".format(i))
+                    y = (1 - heat / self.timegraph_setting['max_heat'])*300
+                    # exec("self.timepoint{0} = self.time_graph.create_oval({1},{2}-5,{1}+5,{2},fill={3},outline={4},width=2)".format(
+                    #         i, x, y, self.point_color[0], self.point_color[1]))
+                    exec("self.time_graph.coords(self.timepoint{0},{1},{2}-5,{1}+5,{2})".format(i, x, y))
+
+            # 绘图
+
             heat = self.cores_setting['heat']
             time_s = self.tick//20
-            x = (self.tick/self.timegraph_setting['max_time'])*500
-            y = (1 - heat/self.timegraph_setting['max_heat'])*300
+
+            x = (self.tick / self.timegraph_setting['max_time']) * 500
+            y = (1 - heat / self.timegraph_setting['max_heat']) * 300
+            # exec("print(self.cores_setting_{}['heat'])".format(i))
+            # print(self.timegraph_setting['max_heat'])
             exec('self.timepoint{0} = self.time_graph.create_oval({1},{2}-5,{1}+5,{2},fill={3},outline={4},width=2)'.format(time_s, x, y, self.point_color[0], self.point_color[1]))
             ###统计信息部分
             self.updeta_ttinf()
@@ -1890,7 +1960,7 @@ class main:
                             if n > maxn:
                                 self.cores_setting[core_id]['rod']['life_multi'] = 4 * (n/maxn)
                                 self.cores_setting[core_id]['rod']['overloaded'] = True
-                                if n > maxn * 2:
+                                if n > maxn * 100:
                                     self.cores_setting[core_id]['rod']['overloaded2'] = True
                                 else:
                                     self.cores_setting[core_id]['rod']['overloaded2'] = False
@@ -1922,7 +1992,7 @@ class main:
                                     self.get_neutron((i,j,  1), (i,j,k), En[k])
                                     self.get_neutron((i+1,j,1), (i,j,k), En[k])
                                     self.get_neutron((i,j,  2), (i,j,k), En[k])
-                                    self.get_neutron((i,j+1,2), (i,j,k), En[k])                           
+                                    self.get_neutron((i,j+1,2), (i,j,k), En[k])
                             if En[k] != None and s[k] != None:
                                 n = self.cores_setting[core_id]['rod'][k]['neutron']
                                 maxn = round(all_rods[self.cores_setting[core_id]['rod'][k]['id']]['detail']['maximum']*coolant['maximum'])
@@ -1930,7 +2000,7 @@ class main:
                                 if n > maxn:
                                     self.cores_setting[core_id]['rod'][k]['life_multi'] = 4 * (n/maxn)
                                     self.cores_setting[core_id]['rod'][k]['overloaded'] = True
-                                    if n > maxn * 2:
+                                    if n > maxn * 100:
                                         self.cores_setting[core_id]['rod'][k]['overloaded2'] = True
                                     else:
                                         self.cores_setting[core_id]['rod'][k]['overloaded2'] = False
@@ -1962,7 +2032,7 @@ class main:
                             if n > maxn:
                                 self.cores_setting[core_id]['rod']['life_multi'] = 4 * (n/maxn) * 4
                                 self.cores_setting[core_id]['rod']['overloaded'] = True
-                                if n > maxn * 2:
+                                if n > maxn * 100:
                                     self.cores_setting[core_id]['rod']['overloaded2'] = True
                                 else:
                                     self.cores_setting[core_id]['rod']['overloaded2'] = False
@@ -2002,7 +2072,7 @@ class main:
                                 if n > maxn:
                                     self.cores_setting[core_id]['rod'][k]['life_multi'] = 4 * (n/maxn) * 4
                                     self.cores_setting[core_id]['rod'][k]['overloaded'] = True
-                                    if n > maxn * 2:
+                                    if n > maxn * 100:
                                         self.cores_setting[core_id]['rod'][k]['overloaded2'] = True
                                     else:
                                         self.cores_setting[core_id]['rod'][k]['overloaded2'] = False
@@ -2141,14 +2211,14 @@ class main:
                 self.pause_b.grid_forget()
                 self.reset_b.grid(row=4, column=6, padx=5, pady=5)
 
+            # exec('print(self.cores_setting_{})'.format(self.tick // 20-1))
             #remeber
             self.cores_setting['tttime'] += 1
             if self.is_start:
                 self.simwin.after(5, next_20tick)
-        ##########
+        #########
         if self.is_start:
             next_20tick()
-
 
     def pause_sim(self):
         self.is_start = False
@@ -2177,6 +2247,13 @@ class main:
         self.reset_b.grid_forget()
         self.start_b.grid(row=4, column=6, padx=5, pady=5)
 
+        self.timeCount = 1
+        self.time_graph.delete(self.u100line)
+        self.u100line = self.time_graph.create_line(0, 300 / 2, 580, 300 / 2, fill='#ff8888', dash=(4, 4))
+        self.time_graph.delete(self.u100text)
+        self.u100text = self.time_graph.create_text(7, 300 / 2 - 2, text='', anchor=SW, font=font_normal,
+                                                    fill='#9e4545')
+
     ####切换反应堆状态
     def change_time(self, event):
         sel_time = (event.x/500)*self.timegraph_setting['max_time']
@@ -2199,7 +2276,7 @@ class main:
                 self.start_b.grid(row=4, column=6, padx=5, pady=5)
             else:
                 self.reset_b.grid(row=4, column=6, padx=5, pady=5)
-            
+
 ######################################
     def debug(self, event):
         print(self.cores_setting['core0_0']['core_inf'])

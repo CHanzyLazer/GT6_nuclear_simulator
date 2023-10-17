@@ -1,28 +1,28 @@
-version: 6.15.00
+version: 6.15.05+
 font_normal:
-- Lucida Console
-- 10
-- normal
+  - Lucida Console
+  - 10
+  - normal
 font_small:
-- Lucida Console
-- 9
-- normal
+  - Lucida Console
+  - 9
+  - normal
 font_button:
-- Lucida Console
-- 14
-- bold
+  - Lucida Console
+  - 14
+  - bold
 font_namesC:
-- Lucida Console
-- 10
-- bold
+  - Lucida Console
+  - 10
+  - bold
 font_namesR:
-- Arial
-- 7
-- bold
+  - Arial
+  - 7
+  - bold
 font_heat:
-- Arial
-- 10
-- normal
+  - Arial
+  - 10
+  - normal
 infomation:
   names: 是否显示燃料棒和冷却剂名称
   heat: 是否显示产热速度
@@ -33,7 +33,7 @@ infomation:
   progress: 是否显示燃料棒的剩余寿命和增殖棒的转换进度
   addsize: 增加反应室的大小
   redsize: 减少反应室的大小
-  precent: '{:.2f}%'
+  precent: "{:.2f}%"
   core1x1: "核反应堆核心(1x1)\n\n也能用于改变冷却剂种类"
   core1x1_name: 核反应堆核心(1x1)
   core2x2: "核反应堆核心(2x2)\n\n也能用于改变冷却剂种类"
@@ -42,67 +42,87 @@ infomation:
   pliers: "钳子\n\n用于拆卸燃料棒"
   soft_hammer: "软锤\n\n用于暂时关闭燃料棒\n关闭会清除中子数和慢化, 但不会重置耐久"
   empty: 空
-  core_com0: '内容: {}'
-  core_com1: '中子数: {:.0f}'
-  core_com2: '剩余时间: {:.2f} min'
-  core_com3: '转换还需: {:,.0f} 中子'
-  core_com4: '冷却剂: {}'
+  core_com0: "内容: {}"
+  core_com1: "中子数: {:.0f}"
+  core_com2: "剩余时间: {:.2f} min"
+  core_com3: "转换还需: {:,.0f} 中子"
+  core_com4: "冷却剂: {}"
   core_com5: 被慢化!
-  core_com6: '产热: {:.0f} HU/t'
-  core_com7: '{:.1f} L/t'
-  core_com8: '中子利用率: {}'
+  core_com6: "产热: {:.0f} HU/t"
+  core_com7: "{:.1f} L/t"
+  core_com8: "中子利用率: {}"
   core_com9: 枯竭的
   core_com10: (超载!!)
-  core_com11: '耐久消耗倍数: {:.2f}'
-  core_com12: '转换速度: {:.0f} 中子/t'
+  core_com11: "耐久消耗倍数: {:.2f}"
+  core_com12: "转换速度: {:.0f} 中子/t"
   core_com13: 未激活
-  core_com14: '冷却剂: {}'
-  core_com15: '{:.1f} L/Sec'
+  core_com14: "冷却剂: {}"
+  core_com15: "{:.1f} L/Sec"
   core_com16: 平均
-  ttinf0: '总产热: {:,.0f} HU'
-  ttinf1: '产热: {:.0f} HU/t'
-  ttinf2: '产热利用率: {}'
-  ttinf3: ' (平均: {:.0f} HU/t)'
-  ttinf4: '反应时间: {:.0f} Day {:.0f} Hour {:.0f} Min {:.0f} Sec '
-  ttinf5: ' (平均: {})'
+  ttinf0: "总产热: {:,.0f} HU"
+  ttinf1: "产热: {:.0f} HU/t"
+  ttinf2: "产热利用率: {}"
+  ttinf3: " (平均: {:.0f} HU/t)"
+  ttinf4: "反应时间: {:.0f} Day {:.0f} Hour {:.0f} Min {:.0f} Sec "
+  ttinf5: " (平均: {})"
   rod_2: "中子吸收棒\n\n吸收中子并释放两倍的热量"
   rod_3: "中子反射棒\n\n反射中子回到源头, 加速反应"
   rod_4: "中子慢化棒\n\n反射周围激活燃料棒倍数的中子, 比反射棒更能加速反应\n但周围的燃料棒会被慢化并继续慢化周围燃料棒\n慢化的燃料棒不能用于增殖且只能使用四分之一的时间"
-  rod_10: "钍-232燃料棒\n\n在{}中\n向周围发射: {:<6d}中子\n向自身发射: {:<6d}中子\n最高中子数：  {:<6d}中子\n\
+  rod_10:
+    "钍-232燃料棒\n\n在{}中\n向周围发射: {:<6d}中子\n向自身发射: {:<6d}中子\n最高中子数：  {:<6d}中子\n\
     系数: {}\n寿命: {:,} min{}"
-  rod_20: "铀-238燃料棒\n\n在{}中\n向周围发射: {:<6d}中子\n向自身发射: {:<6d}中子\n最高中子数：  {:<6d}中子\n\
+  rod_20:
+    "铀-238燃料棒\n\n在{}中\n向周围发射: {:<6d}中子\n向自身发射: {:<6d}中子\n最高中子数：  {:<6d}中子\n\
     系数: {}\n寿命: {:,} min{}"
-  rod_21: "铀-235燃料棒\n\n在{}中\n向周围发射: {:<6d}中子\n向自身发射: {:<6d}中子\n最高中子数：  {:<6d}中子\n\
+  rod_21:
+    "铀-235燃料棒\n\n在{}中\n向周围发射: {:<6d}中子\n向自身发射: {:<6d}中子\n最高中子数：  {:<6d}中子\n\
     系数: {}\n寿命: {:,} min{}\n\n这个燃料棒十分重要"
-  rod_22: "铀-233燃料棒\n\n在{}中\n向周围发射: {:<6d}中子\n向自身发射: {:<6d}中子\n最高中子数：  {:<6d}中子\n\
+  rod_22:
+    "铀-233燃料棒\n\n在{}中\n向周围发射: {:<6d}中子\n向自身发射: {:<6d}中子\n最高中子数：  {:<6d}中子\n\
     系数: {}\n寿命: {:,} min{}\n\n这个燃料棒十分重要"
-  rod_30: "钚-244燃料棒\n\n在{}中\n向周围发射: {:<6d}中子\n向自身发射: {:<6d}中子\n最高中子数：  {:<6d}中子\n\
+  rod_30:
+    "钚-244燃料棒\n\n在{}中\n向周围发射: {:<6d}中子\n向自身发射: {:<6d}中子\n最高中子数：  {:<6d}中子\n\
     系数: {}\n寿命: {:,} min{}\n\n这个燃料棒十分重要"
-  rod_31: "钚-241燃料棒\n\n在{}中\n向周围发射: {:<6d}中子\n向自身发射: {:<6d}中子\n最高中子数：  {:<6d}中子\n\
+  rod_31:
+    "钚-241燃料棒\n\n在{}中\n向周围发射: {:<6d}中子\n向自身发射: {:<6d}中子\n最高中子数：  {:<6d}中子\n\
     系数: {}\n寿命: {:,} min{}\n\n这个燃料棒十分重要"
-  rod_32: "钚-243燃料棒\n\n在{}中\n向周围发射: {:<6d}中子\n向自身发射: {:<6d}中子\n最高中子数：  {:<6d}中子\n\
+  rod_32:
+    "钚-243燃料棒\n\n在{}中\n向周围发射: {:<6d}中子\n向自身发射: {:<6d}中子\n最高中子数：  {:<6d}中子\n\
     系数: {}\n寿命: {:,} min{}\n\n这个燃料棒十分重要"
-  rod_33: "钚-239燃料棒\n\n在{}中\n向周围发射: {:<6d}中子\n向自身发射: {:<6d}中子\n最高中子数：  {:<6d}中子\n\
+  rod_33:
+    "钚-239燃料棒\n\n在{}中\n向周围发射: {:<6d}中子\n向自身发射: {:<6d}中子\n最高中子数：  {:<6d}中子\n\
     系数: {}\n寿命: {:,} min{}\n\n这个燃料棒十分重要"
-  rod_40: "镅-245燃料棒\n\n在{}中\n向周围发射: {:<6d}中子\n向自身发射: {:<6d}中子\n最高中子数：  {:<6d}中子\n\
+  rod_40:
+    "镅-245燃料棒\n\n在{}中\n向周围发射: {:<6d}中子\n向自身发射: {:<6d}中子\n最高中子数：  {:<6d}中子\n\
     系数: {}\n寿命: {:,} min{}\n\n这个燃料棒十分重要"
-  rod_41: "镅-241燃料棒\n\n在{}中\n向周围发射: {:<6d}中子\n向自身发射: {:<6d}中子\n最高中子数：  {:<6d}中子\n\
+  rod_41:
+    "镅-241燃料棒\n\n在{}中\n向周围发射: {:<6d}中子\n向自身发射: {:<6d}中子\n最高中子数：  {:<6d}中子\n\
     系数: {}\n寿命: {:,} min{}\n\n这个燃料棒十分重要"
-  rod_50: "钴-60燃料棒\n\n在{}中\n向周围发射: {:<6d}中子\n向自身发射: {:<6d}中子\n最高中子数：  {:<6d}中子\n系数:\
+  rod_50:
+    "钴-60燃料棒\n\n在{}中\n向周围发射: {:<6d}中子\n向自身发射: {:<6d}中子\n最高中子数：  {:<6d}中子\n系数:\
     \ {}\n寿命: {:,} min{}"
-  rod_60: "浓缩硅岩金属燃料棒\n\n在{}中\n向周围发射: {:<6d}中子\n向自身发射: {:<6d}中子\n最高中子数：  {:<6d}中子\n\
+  rod_60:
+    "浓缩硅岩金属燃料棒\n\n在{}中\n向周围发射: {:<6d}中子\n向自身发射: {:<6d}中子\n最高中子数：  {:<6d}中子\n\
     系数: {}\n寿命: {:,} min{}\n\n这个燃料棒十分重要"
-  rod_61: "硅岩金属化合物燃料棒\n\n在{}中\n向周围发射: {:<6d}中子\n向自身发射: {:<6d}中子\n最高中子数：  {:<6d}中子\n\
+  rod_61:
+    "硅岩金属化合物燃料棒\n\n在{}中\n向周围发射: {:<6d}中子\n向自身发射: {:<6d}中子\n最高中子数：  {:<6d}中子\n\
     系数: {}\n寿命: {:,} min{}\n\n这个燃料棒十分重要"
-  rod_110: "钍-232增殖棒\n\n吸收中子以增殖成新燃料棒\n每个中子释放一半的热量\n不能用慢化的燃料棒的中子增殖\n每个方向上减去损耗中子数后计入转换需要中子\n\
+  rod_110:
+    "钍-232增殖棒\n\n吸收中子以增殖成新燃料棒\n每个中子释放一半的热量\n不能用慢化的燃料棒的中子增殖\n每个方向上减去损耗中子数后计入转换需要中子\n\
     \n需要: 64,000,000 中子\n损耗: 1000 中子\n转换成: 铀-233浓缩燃料棒"
-  rod_120: "铀-238增殖棒\n\n吸收中子以增殖成新燃料棒\n每个中子释放一半的热量\n不能用慢化的燃料棒的中子增殖\n每个方向上减去损耗中子数后计入转换需要中子\n\
+  rod_120:
+    "铀-238增殖棒\n\n吸收中子以增殖成新燃料棒\n每个中子释放一半的热量\n不能用慢化的燃料棒的中子增殖\n每个方向上减去损耗中子数后计入转换需要中子\n\
     \n需要: 256,000,000 中子\n损耗: 2500 中子\n转换成: 钚-239浓缩燃料棒"
-  rod_130: "锂增殖棒\n\n吸收中子以增殖成新燃料棒\n每个中子释放一半的热量\n不能用慢化的燃料棒的中子增殖\n每个方向上减去损耗中子数后计入转换需要中子\n\
+  rod_130:
+    "锂增殖棒\n\n吸收中子以增殖成新燃料棒\n每个中子释放一半的热量\n不能用慢化的燃料棒的中子增殖\n每个方向上减去损耗中子数后计入转换需要中子\n\
     \n需要: 640,000 中子\n损耗: 250 中子\n转换成: 氚浓缩燃料棒"
+  rod_140:
+    "硅岩金属增殖棒\n\n吸收中子以增殖成新燃料棒\n每个中子释放一半的热量\n不能用慢化的燃料棒的中子增殖\n每个方向上减去损耗中子数后计入转换需要中子\n\
+    \n需要: 4,096,000,000 中子\n损耗: 10000 中子\n转换成: 浓缩硅岩金属浓缩棒"
   rod_111: "铀-233浓缩燃料棒\n\n每个中子释放一半的热量\n\n由 钍-232增殖棒 增殖而来"
   rod_121: "钚-239浓缩燃料棒\n\n每个中子释放一半的热量\n\n由 铀-238增殖棒 增殖而来"
   rod_131: "氚浓缩燃料棒\n\n每个中子释放一半的热量\n\n由 锂增殖棒 增殖而来"
+  rod_141: "浓缩硅岩金属浓缩棒\n\n每个中子释放一半的热量\n\n由 硅岩金属增殖棒 增殖而来"
   rod_2_name: 中子吸收棒
   rod_3_name: 中子反射棒
   rod_4_name: 中子慢化棒
@@ -122,10 +142,12 @@ infomation:
   rod_110_name: 钍-232增殖棒
   rod_120_name: 铀-238增殖棒
   rod_130_name: 锂增殖棒
+  rod_140_name: 硅岩金属增殖棒
   rod_111_name: 铀-233浓缩燃料棒
   rod_121_name: 钚-239浓缩燃料棒
   rod_131_name: 氚浓缩燃料棒
-  timeline0: '标准100%产热: {:.0f} HU/t'
+  rod_141_name: 浓缩硅岩金属浓缩棒
+  timeline0: "标准100%产热: {:.0f} HU/t"
   time_graph: 左键将反应堆切换到这个时间
   start_b: "开始/继续模拟\n模拟过程再次点击暂停，模拟结束点击重置\n由于技术原因，预测不会考虑平均的损耗或转换！"
   stop_b: "停止模拟\n清空时间线，不会重置反应堆"
@@ -133,15 +155,17 @@ infomation:
   industrial_coolant: "工业冷却液\n\n常规冷却剂\n每吸收 20HU 热量, 将 1L冷却液 转换成 1L热冷却液"
   industrial_coolant_name: 工业冷却液
   industrial_coolant_out: 热冷却液
-  industrial_coolant_core: ''
-  industrial_coolant_rod: ''
-  molten_lithium_chlorid: "熔融氯化锂\n\n熔盐冷却剂, 有更高的最高发射中子数\n每吸收 15HU 热量, 将 1L熔融氯化锂 转换成\
+  industrial_coolant_core: ""
+  industrial_coolant_rod: ""
+  molten_lithium_chlorid:
+    "熔融氯化锂\n\n熔盐冷却剂, 有更高的最高发射中子数\n每吸收 15HU 热量, 将 1L熔融氯化锂 转换成\
     \ 1L热熔融氯化锂"
   molten_lithium_chlorid_name: 熔融氯化锂
   molten_lithium_chlorid_out: 热熔融氯化锂
-  molten_lithium_chlorid_rod: ''
-  molten_lithium_chlorid_core: ''
-  molten_thorium_salt: "熔融钍盐\n\n熔融钍盐冷却剂, 有四倍的最高发射中子数, 但不会转换成对应的热冷却剂\n每吸收 2,560,000HU 热量,\
+  molten_lithium_chlorid_rod: ""
+  molten_lithium_chlorid_core: ""
+  molten_thorium_salt:
+    "熔融钍盐\n\n熔融钍盐冷却剂, 有四倍的最高发射中子数, 但不会转换成对应的热冷却剂\n每吸收 2,560,000HU 热量,\
     \ 将 1L熔融钍盐 转换成 1L熔融氯化锂"
   molten_thorium_salt_name: 熔融钍盐
   molten_thorium_salt_out: 熔融氯化锂
@@ -150,13 +174,13 @@ infomation:
   carbon_dioxide: "二氧化碳\n\n气态冷却剂, 有比常规冷却剂更好的性能\n每吸收 20HU 热量, 将 1L二氧化碳 转换成 1L热二氧化碳"
   carbon_dioxide_name: 二氧化碳
   carbon_dioxide_out: 热二氧化碳
-  carbon_dioxide_core: ''
-  carbon_dioxide_rod: ''
+  carbon_dioxide_core: ""
+  carbon_dioxide_rod: ""
   helium: "氦\n\n气态冷却剂, 有比常规冷却剂更好的性能\n每吸收 30HU 热量, 将 1L氦 转换成 1L热氦"
   helium_name: 氦
   helium_out: 热氦
-  helium_core: ''
-  helium_rod: ''
+  helium_core: ""
+  helium_rod: ""
   distill_water: "蒸馏水\n\n水基冷却剂, 慢化内部的燃料棒, 直接输出蒸汽\n每吸收 80HU 热量, 将 1L蒸馏水 转换成 160L蒸汽"
   distill_water_name: 蒸馏水
   distill_water_out: 蒸汽
@@ -193,25 +217,25 @@ all_rods:
     tex_name: 中子吸收棒
     type: absorb_rod
     name: Abs
-    name_col: '#474747'
+    name_col: "#474747"
     detail:
   rod_3:
     tex_name: 中子反射棒
     type: reflect_rod
     name: Ref
-    name_col: '#709663'
+    name_col: "#709663"
     detail:
   rod_4:
     tex_name: 中子慢化棒
     type: moderate_rod
     name: Mod
-    name_col: '#403f6e'
+    name_col: "#403f6e"
     detail:
   rod_10:
     tex_name: 钍-232燃料棒
     type: fuel_rod
     name: Th-232
-    name_col: '#082a00'
+    name_col: "#082a00"
     detail:
       life: 6000000
       emission: 8
@@ -223,7 +247,7 @@ all_rods:
     tex_name: 铀-238燃料棒
     type: fuel_rod
     name: U-238
-    name_col: '#105600'
+    name_col: "#105600"
     detail:
       life: 3000000
       emission: 16
@@ -235,7 +259,7 @@ all_rods:
     tex_name: 铀-235燃料棒
     type: fuel_rod
     name: U-235
-    name_col: '#1b8f00'
+    name_col: "#1b8f00"
     detail:
       life: 600000
       emission: 128
@@ -247,7 +271,7 @@ all_rods:
     tex_name: 铀-233燃料棒
     type: fuel_rod
     name: U-233
-    name_col: '#2ae000'
+    name_col: "#2ae000"
     detail:
       life: 3000000
       emission: 128
@@ -259,7 +283,7 @@ all_rods:
     tex_name: 钚-244燃料棒
     type: fuel_rod
     name: Pu-244
-    name_col: '#740000'
+    name_col: "#740000"
     detail:
       life: 600000
       emission: 256
@@ -271,7 +295,7 @@ all_rods:
     tex_name: 钚-241燃料棒
     type: fuel_rod
     name: Pu-241
-    name_col: '#a20000'
+    name_col: "#a20000"
     detail:
       life: 600000
       emission: 512
@@ -283,7 +307,7 @@ all_rods:
     tex_name: 钚-243燃料棒
     type: fuel_rod
     name: Pu-243
-    name_col: '#dc0000'
+    name_col: "#dc0000"
     detail:
       life: 600000
       emission: 512
@@ -295,7 +319,7 @@ all_rods:
     tex_name: 钚-239燃料棒
     type: fuel_rod
     name: Pu-239
-    name_col: '#f30000'
+    name_col: "#f30000"
     detail:
       life: 1200000
       emission: 512
@@ -307,7 +331,7 @@ all_rods:
     tex_name: 镅-245燃料棒
     type: fuel_rod
     name: Am-245
-    name_col: '#565656'
+    name_col: "#565656"
     detail:
       life: 600000
       emission: 256
@@ -319,7 +343,7 @@ all_rods:
     tex_name: 镅-241燃料棒
     type: fuel_rod
     name: Am-241
-    name_col: '#7c7c7c'
+    name_col: "#7c7c7c"
     detail:
       life: 600000
       emission: 512
@@ -331,7 +355,7 @@ all_rods:
     tex_name: 钴-60燃料棒
     type: fuel_rod
     name: Co-60
-    name_col: '#00259c'
+    name_col: "#00259c"
     detail:
       life: 60000
       emission: 0
@@ -343,7 +367,7 @@ all_rods:
     tex_name: 浓缩硅岩金属燃料棒
     type: fuel_rod
     name: Nq-528
-    name_col: '#000000'
+    name_col: "#000000"
     detail:
       life: 6000000
       emission: 512
@@ -355,7 +379,7 @@ all_rods:
     tex_name: 硅岩金属化合物燃料棒
     type: fuel_rod
     name: Nq-522
-    name_col: '#1e1e1e'
+    name_col: "#1e1e1e"
     detail:
       life: 6000000
       emission: 2048
@@ -367,7 +391,7 @@ all_rods:
     tex_name: 钍-232增殖棒
     type: breed_rod
     name: Th-232-B
-    name_col: '#23391e'
+    name_col: "#23391e"
     detail:
       needed: 64000000
       loss: 1000
@@ -376,7 +400,7 @@ all_rods:
     tex_name: 铀-238增殖棒
     type: breed_rod
     name: U-238-B
-    name_col: '#1a560c'
+    name_col: "#1a560c"
     detail:
       needed: 256000000
       loss: 2500
@@ -385,28 +409,43 @@ all_rods:
     tex_name: 锂增殖棒
     type: breed_rod
     name: Li-B
-    name_col: '#9692ad'
+    name_col: "#9692ad"
     detail:
       needed: 640000
       loss: 250
       turnto: rod_131
+  rod_140:
+    tex_name: 硅岩金属增殖棒
+    type: breed_rod
+    name: Nq-B
+    name_col: "#000000"
+    detail:
+      needed: 4096000000
+      loss: 10000
+      turnto: rod_141
   rod_111:
     tex_name: 铀-233浓缩燃料棒
     type: enrich_rod
     name: U-233-E
-    name_col: '#2ae000'
+    name_col: "#2ae000"
     detail:
   rod_121:
     tex_name: 钚-239浓缩燃料棒
     type: enrich_rod
     name: Pu-239-E
-    name_col: '#f30000'
+    name_col: "#f30000"
     detail:
   rod_131:
     tex_name: 氚浓缩燃料棒
     type: enrich_rod
     name: H-3-E
-    name_col: '#ff0000'
+    name_col: "#ff0000"
+    detail:
+  rod_141:
+    tex_name: 浓缩硅岩金属浓缩棒
+    type: enrich_rod
+    name: Nq-E
+    name_col: "#000000"
     detail:
 all_coolant:
   industrial_coolant:
@@ -414,130 +453,130 @@ all_coolant:
     emission: 1
     self: 1
     maximum: 1
-    factor: '{}'
+    factor: "{}"
     utilization: 1
     moderate: false
     heat_capacity: 20
     fluid_eff: 1
     name: IC
-    name_col: '#208f9d'
+    name_col: "#208f9d"
   molten_lithium_chlorid:
     life: 1
     emission: 0.125
     self: 1.25
     maximum: 1.25
-    factor: '{}/2'
+    factor: "{}/2"
     utilization: 1
     moderate: false
     heat_capacity: 15
     fluid_eff: 1
     name: LiCl
-    name_col: '#9e9eb2'
+    name_col: "#9e9eb2"
   molten_thorium_salt:
     life: 1
     emission: 0.125
     self: 0
     maximum: 4
-    factor: '{}/2-1'
+    factor: "{}/2-1"
     utilization: 0
     moderate: false
     heat_capacity: 2560000
     fluid_eff: 1
     name: ThS
-    name_col: '#006600'
+    name_col: "#006600"
   carbon_dioxide:
     life: 1
     emission: 0.25
     self: 0.75
     maximum: 1
-    factor: '{}/2'
+    factor: "{}/2"
     utilization: 1
     moderate: false
     heat_capacity: 20
     fluid_eff: 1
     name: CO2
-    name_col: '#828282'
+    name_col: "#828282"
   helium:
     life: 1
     emission: 0.125
     self: 0.25
     maximum: 1
-    factor: '{}/2'
+    factor: "{}/2"
     utilization: 1
     moderate: false
     heat_capacity: 30
     fluid_eff: 1
     name: He
-    name_col: '#d1d165'
+    name_col: "#d1d165"
   distill_water:
     life: 1
     emission: 0.25
     self: 0.25
     maximum: 1
-    factor: '{}/2'
+    factor: "{}/2"
     utilization: 1
     moderate: true
     heat_capacity: 0.5
     fluid_eff: 1
     name: H2O
-    name_col: '#4c67ff'
+    name_col: "#4c67ff"
   D2O_water:
     life: 1
     emission: 0.25
     self: 0.25
     maximum: 0.125
-    factor: '{}/2'
+    factor: "{}/2"
     utilization: 1
     moderate: true
     heat_capacity: 50
     fluid_eff: 1
     name: D2O
-    name_col: '#e7e75b'
+    name_col: "#e7e75b"
   HDO_water:
     life: 1
     emission: 0.25
     self: 0.25
     maximum: 1
-    factor: '{}/2'
+    factor: "{}/2"
     utilization: 1
     moderate: true
     heat_capacity: 40
     fluid_eff: 1
     name: HDO
-    name_col: '#b4b497'
+    name_col: "#b4b497"
   T2O_water:
     life: 1
     emission: 0.25
     self: 0.25
     maximum: 0.0625
-    factor: '{}/2'
+    factor: "{}/2"
     utilization: 1
     moderate: true
     heat_capacity: 60
     fluid_eff: 1
     name: T2O
-    name_col: '#ff5a5a'
+    name_col: "#ff5a5a"
   molten_tin:
     life: 1
     emission: 0.25
     self: 0.25
     maximum: 1
-    factor: '{}/2-1'
+    factor: "{}/2-1"
     utilization: 0.3333333333333333
     moderate: false
     heat_capacity: 40
     fluid_eff: 0.3333333333333333
     name: Sn
-    name_col: '#b5b5b5'
+    name_col: "#b5b5b5"
   molten_sodium:
     life: 1
     emission: 0.25
     self: 0.25
     maximum: 1
-    factor: '{}/2-1'
+    factor: "{}/2-1"
     utilization: 0.16666666666666666
     moderate: false
     heat_capacity: 30
     fluid_eff: 0.16666666666666666
     name: Na
-    name_col: '#0000ff'
+    name_col: "#0000ff"
