@@ -1,4 +1,4 @@
-version: 6.15.00
+version: 6.15.05+
 font_normal:
 - Lucida Console
 - 10
@@ -100,9 +100,12 @@ infomation:
     \n需要: 256,000,000 中子\n损耗: 2500 中子\n转换成: 钚-239浓缩燃料棒"
   rod_130: "锂增殖棒\n\n吸收中子以增殖成新燃料棒\n每个中子释放一半的热量\n不能用慢化的燃料棒的中子增殖\n每个方向上减去损耗中子数后计入转换需要中子\n\
     \n需要: 640,000 中子\n损耗: 250 中子\n转换成: 氚浓缩燃料棒"
+  rod_140: "硅岩金属增殖棒\n\n吸收中子以增殖成新燃料棒\n每个中子释放一半的热量\n不能用慢化的燃料棒的中子增殖\n每个方向上减去损耗中子数后计入转换需要中子\n\
+      \n需要: 4,096,000,000 中子\n损耗: 10000 中子\n转换成: 浓缩硅岩金属浓缩棒"
   rod_111: "铀-233浓缩燃料棒\n\n每个中子释放一半的热量\n\n由 钍-232增殖棒 增殖而来"
   rod_121: "钚-239浓缩燃料棒\n\n每个中子释放一半的热量\n\n由 铀-238增殖棒 增殖而来"
   rod_131: "氚浓缩燃料棒\n\n每个中子释放一半的热量\n\n由 锂增殖棒 增殖而来"
+  rod_141: "浓缩硅岩金属浓缩棒\n\n每个中子释放一半的热量\n\n由 硅岩金属增殖棒 增殖而来"
   rod_2_name: 中子吸收棒
   rod_3_name: 中子反射棒
   rod_4_name: 中子慢化棒
@@ -122,9 +125,11 @@ infomation:
   rod_110_name: 钍-232增殖棒
   rod_120_name: 铀-238增殖棒
   rod_130_name: 锂增殖棒
+  rod_140_name: 硅岩金属增殖棒
   rod_111_name: 铀-233浓缩燃料棒
   rod_121_name: 钚-239浓缩燃料棒
   rod_131_name: 氚浓缩燃料棒
+  rod_141_name: 浓缩硅岩金属浓缩棒
   timeline0: '标准100%产热: {:.0f} HU/t'
   time_graph: 左键将反应堆切换到这个时间
   start_b: "开始/继续模拟\n模拟过程再次点击暂停，模拟结束点击重置\n由于技术原因，预测不会考虑平均的损耗或转换！"
@@ -141,7 +146,7 @@ infomation:
   molten_lithium_chlorid_out: 热熔融氯化锂
   molten_lithium_chlorid_rod: ''
   molten_lithium_chlorid_core: ''
-  molten_thorium_salt: "熔融钍盐\n\n熔融钍盐冷却剂, 有四倍的最高发射中子数, 但不会转换成对应的热冷却剂\n每吸收 2,560,000HU 热量,\
+  molten_thorium_salt: "熔融钍盐\n\n熔融钍盐冷却剂, 有四倍的最高发射中子数, 但不会转换成对应的热冷却剂\n每吸收 10000HU 热量,\
     \ 将 1L熔融钍盐 转换成 1L熔融氯化锂"
   molten_thorium_salt_name: 熔融钍盐
   molten_thorium_salt_out: 熔融氯化锂
@@ -390,6 +395,15 @@ all_rods:
       needed: 640000
       loss: 250
       turnto: rod_131
+  rod_140:
+    tex_name: 硅岩金属增殖棒
+    type: breed_rod
+    name: Nq-B
+    name_col: '#000000'
+    detail:
+      needed: 4096000000
+      loss: 10000
+      turnto: rod_141
   rod_111:
     tex_name: 铀-233浓缩燃料棒
     type: enrich_rod
@@ -407,6 +421,12 @@ all_rods:
     type: enrich_rod
     name: H-3-E
     name_col: '#ff0000'
+    detail:
+  rod_141:
+    tex_name: 浓缩硅岩金属浓缩棒
+    type: enrich_rod
+    name: Nq-E
+    name_col: '#000000'
     detail:
 all_coolant:
   industrial_coolant:
