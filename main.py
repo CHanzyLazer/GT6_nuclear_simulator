@@ -1399,7 +1399,7 @@ class main:
         elif self.cores_setting[core_id]['base'] == None:
             return None, None
 
-    def cal_emissiom_num(self, posij, is_moderated=False):
+    def cal_emission_num(self, posij, is_moderated=False):
         i,j = posij
         core_id = 'core{}_{}'.format(i,j)
         if self.cores_setting[core_id]['base'] == 'core1x1':
@@ -1415,7 +1415,7 @@ class main:
                         exec('self.f = round({})'.format(coolant['factor'].format(all_rods[rod['id']]['detail']['factor'])))
                         f = 1/self.f
                         n = rod['neutron']
-                        En = ceil(max((e + ((n-s)*f))/2, 0))
+                        En = ceil(e + max(n - s, 0) * f / 2)
             return En, 'core1x1', s
         elif self.cores_setting[core_id]['base'] == 'core2x2':
             En = [None, None, None, None]
@@ -1432,7 +1432,7 @@ class main:
                             exec('self.f = round({})'.format(coolant['factor'].format(all_rods[rod['id']]['detail']['factor'])))
                             f = 1/self.f
                             n = rod['neutron']
-                            En[k] = ceil(max(e + ((n-s[k])*f), 0))
+                            En[k] = ceil(e + max(n - s[k], 0) * f)
             return En, 'core2x2', s
         elif self.cores_setting[core_id]['base'] == None:
             return None, None, None
@@ -1939,7 +1939,7 @@ class main:
             for i in range(self.core_num):
                 for j in range(self.core_num):
                     core_id = 'core{}_{}'.format(i,j)
-                    En, base_id, s = self.cal_emissiom_num((i,j))
+                    En, base_id, s = self.cal_emission_num((i,j))
                     if base_id == 'core1x1':
                         coolant = all_coolant[self.cores_setting[core_id]['coolant']]
                         if s != None:
@@ -2011,7 +2011,7 @@ class main:
             for i in range(self.core_num):
                 for j in range(self.core_num):
                     core_id = 'core{}_{}'.format(i,j)
-                    En, base_id, s = self.cal_emissiom_num((i,j), True)
+                    En, base_id, s = self.cal_emission_num((i,j), True)
                     if base_id == 'core1x1':
                         coolant = all_coolant[self.cores_setting[core_id]['coolant']]
                         if s != None:
