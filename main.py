@@ -28,6 +28,7 @@ font_heat = data['font_heat']
 infomation = data['infomation']
 all_rods = data['all_rods']
 all_coolant = data['all_coolant']
+col_nums = data['col_nums']
 
 
 #图片预导入
@@ -154,7 +155,6 @@ class main:
         self.rod_frame.grid(row=0, column=2, rowspan=3, columnspan=2, padx=5, pady=5)
         ##燃料棒
         self.rodkeys = list(all_rods.keys())
-        col_nums = [3, 5, 5, 3, 4, 4]
         i,j = 0,0
         for rod_id in self.rodkeys:
             ###绘图
