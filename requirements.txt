@@ -1,5 +1,4 @@
 mouse==0.7.0
-Pillow==9.5.0
-PyYAML==6.0.1
-ruamel.yaml==0.17.35
-ruamel.yaml.clib==0.2.8
+Pillow
+PyYAML
+ruamel.yaml

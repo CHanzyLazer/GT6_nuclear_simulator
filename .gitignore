@@ -130,3 +130,6 @@ dmypy.json
 
 # vs
 .vs/
+
+# idea
+.idea/

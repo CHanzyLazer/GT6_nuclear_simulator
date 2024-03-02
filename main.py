@@ -111,7 +111,7 @@ class main:
         self.timegraph_setting = \
             {'max_heat' : 1000,
              'max_time' : 600}
-
+        
         self.simwin = Tk()
         self.simwin.title('nuclearSimulator-{}'.format(version))
         self.simwin.iconbitmap('textures/nuclearsim.ico')
@@ -119,10 +119,10 @@ class main:
         self.simwin["background"] = '#aaaaaa'
         self.simwin.resizable(width=False, height=False)
         self.simwin.protocol('WM_DELETE_WINDOW', close_window)
-
+        
         self.simwin.bind_all('<Alt-Key-h>',self.functionAdaptor(self.debug))
         self.simwin.focus_set()
-
+        
         #显示模式部分
         self.dismode_frame = Frame(self.simwin, width=450, height=50, bg='#aaaaaa', highlightthickness=1, highlightbackground='#101010')
         self.dismode_frame.grid(row=0, column=0, padx=5, pady=2)
@@ -136,7 +136,7 @@ class main:
             exec('self.dis_{0}_b.bind(\'<Leave>\',self.Balloon_destroy)'.format(dis_key))
             i += 1
         self.draw_dismode()
-
+        
         #设置部分
         self.setting_frame = Frame(self.simwin, width=200, height=50, bg='#aaaaaa', highlightthickness=1, highlightbackground='#101010')
         self.setting_frame.grid(row=0, column=1, padx=5, pady=5)
@@ -148,7 +148,7 @@ class main:
         self.redsize_b.pack(side=LEFT, padx=5, pady=5)
         self.redsize_b.bind('<Enter>',self.functionAdaptor(self.Balloon_show, msg=infomation['redsize']))
         self.redsize_b.bind('<Leave>',self.Balloon_destroy)
-
+        
         #燃料棒部分
         self.rod_frame = Frame(self.simwin, width=360, height=650, bg='#aaaaaa', highlightthickness=1, highlightbackground='#101010')
         self.rod_frame.grid(row=0, column=2, rowspan=3, columnspan=2, padx=5, pady=5)
@@ -174,7 +174,7 @@ class main:
             exec('self.{0}.bind(\'<Leave>\',self.Balloon_destroy)'.format(rod_id))
             exec('self.{0}.bind(\'<Button-1>\',self.functionAdaptor(self.set_mouse1, setting=rod_id))'.format(rod_id))
             exec('self.{0}.bind(\'<Button-3>\',self.functionAdaptor(self.set_mouse2, setting=rod_id))'.format(rod_id))
-
+        
         #冷却液部分
         self.coolant_frame = Frame(self.simwin, width=300, height=200, bg='#aaaaaa', highlightthickness=1, highlightbackground='#101010')
         self.coolant_frame.grid(row=3, column=3, rowspan=2, padx=5, pady=5)
@@ -200,7 +200,7 @@ class main:
             exec('self.{0}.bind(\'<Enter>\',self.functionAdaptor(self.Balloon_show, msg=infomation[coolant_id]))'.format(coolant_id))
             exec('self.{0}.bind(\'<Leave>\',self.Balloon_destroy)'.format(coolant_id))
             exec('self.{0}.bind(\'<Button-1>\',self.functionAdaptor(self.set_coolant, setting=coolant_id))'.format(coolant_id))
-
+        
         #工具部分
         self.tool_frame = Frame(self.simwin, width=120, height=200, bg='#aaaaaa', highlightthickness=1, highlightbackground='#101010')
         self.tool_frame.grid(row=3, column=2, rowspan=2, padx=5, pady=5)
@@ -212,9 +212,9 @@ class main:
         self.core1x1_image=self.core1x1.create_image(0, 0, anchor=NW, image=core1x1TexTk)
         self.core1x1TexTk = core1x1TexTk # keep img not be deleted
         self.core1x1.grid(row=0, column=0, padx=2, pady=2)
-
+        
         self.timeCount = 1  # 用于记录图像拉伸倍数，在核反应堆超临界时用到
-
+        
         ###添加触发
         self.core1x1.bind('<Enter>',self.functionAdaptor(self.Balloon_show, msg=infomation['core1x1']))
         self.core1x1.bind('<Leave>',self.Balloon_destroy)
@@ -274,12 +274,12 @@ class main:
         self.soft_hammer.bind('<Button-3>',self.functionAdaptor(self.set_mouse2, setting='soft_hammer'))
         #绘制小部件
         self.draw_appand()
-
+        
         #反应堆部分
         self.cores_frame = Frame(self.simwin, width=600, height=600, bg='#aaaaaa', highlightthickness=1, highlightbackground='#101010')
         self.cores_frame.grid(row=1, column=0, rowspan=4, columnspan=2, padx=5, pady=5)
         self.form_core()
-
+        
         ######################
         self.tick = 0
         self.input_tick = 0 #时间
@@ -292,12 +292,12 @@ class main:
         ##触发
         self.start_b.bind('<Enter>',self.functionAdaptor(self.Balloon_show, msg=infomation['start_b']))
         self.start_b.bind('<Leave>',self.Balloon_destroy)
-
+        
         #暂停模拟键
         pauseTk = PIL.ImageTk.PhotoImage(pauseimg)
         self.pause_b = Button(self.simwin, image=pauseTk, command=lambda:self.pause_sim(), highlightthickness=0, bg='#aaaaaa',activebackground='#aaaaaa',bd=4)
         self.pauseTk = pauseTk
-
+        
         #停止模拟键
         stopTk = PIL.ImageTk.PhotoImage(stopimg)
         self.stop_b = Button(self.simwin, image=stopTk, command=lambda:self.stop_sim(input_tick=self.input_tick), highlightthickness=0, bg='#aaaaaa',activebackground='#aaaaaa',bd=4)
@@ -306,7 +306,7 @@ class main:
         ##触发
         self.stop_b.bind('<Enter>',self.functionAdaptor(self.Balloon_show, msg=infomation['stop_b']))
         self.stop_b.bind('<Leave>',self.Balloon_destroy)
-
+        
         #重置模拟键
         resetTk = PIL.ImageTk.PhotoImage(resetimg)
         self.reset_b = Button(self.simwin, image=resetTk, command=lambda:self.reset_sim(), highlightthickness=0, bg='#aaaaaa',activebackground='#aaaaaa',bd=4)
@@ -314,7 +314,7 @@ class main:
         ##触发
         self.reset_b.bind('<Enter>',self.functionAdaptor(self.Balloon_show, msg=infomation['reset_b']))
         self.reset_b.bind('<Leave>',self.Balloon_destroy)
-
+        
         #时间轴
         self.time_graph = Canvas(self.simwin, width=580, height=300, bg='#ffffff', highlightthickness=0)
         time_linesTex = time_linesimg.resize((580,300), PIL.Image.Resampling.NEAREST)
@@ -325,11 +325,11 @@ class main:
         ##效率百分百横线
         self.u100line = self.time_graph.create_line(0,300/2,580,300/2,fill='#ff8888', dash=(4, 4))
         self.u100text = self.time_graph.create_text(7,300/2-2,text='', anchor=SW, font=font_normal,fill='#9e4545')
-
+        
         # 测试使用
         # self.time_graph.delete(self.u100line)
         # self.u100line = self.time_graph.create_line(0, 100 / 2, 580, 100 / 2, fill='#ff8888', dash=(4, 4))
-
+        
         ##选择时间线
         self.selline = self.time_graph.create_line(0,0,0,300,fill='#000000')
         self.seltext = self.time_graph.create_text(7,300/2-2,text='', anchor=SW, font=font_normal,fill='#9e4545')
@@ -337,7 +337,7 @@ class main:
         self.time_graph.bind('<Enter>',self.functionAdaptor(self.Balloon_show, msg=infomation['time_graph']))
         self.time_graph.bind('<Leave>',self.Balloon_destroy)
         self.time_graph.bind('<Button-1>',self.functionAdaptor(self.change_time))
-
+        
         #数据统计
         self.data_frame = Frame(self.simwin, width=580, height=230, bg='#aaaaaa', highlightthickness=1, highlightbackground='#101010')
         self.data_frame.grid(row=2, column=4, rowspan=2, columnspan=3, padx=5, pady=5, sticky=NW)
@@ -363,11 +363,11 @@ class main:
         self.coolantkeys = list(all_coolant.keys())
         for coolant_id in self.coolantkeys:
             exec('self.fluid_{0} = Label(self.data_frame1, fg=None, bg=\'#aaaaaa\', justify=LEFT, font=font_small)'.format(coolant_id))
-
+        
         self.max_heat = 0
-
+        
         self.updeta_ttinf()
-
+        
         #提示框
         self.balloon=Label(self.simwin,fg=None,bg='#c4c4c4',justify=LEFT, font=font_normal)
 
@@ -382,14 +382,14 @@ class main:
              'heat':0,
              'coolant':None,
              'fluid':0}
-
+    
     ##显示设置
     def set_display_setting(self, dis_id):
         if not self.is_start:
             self.display_setting[dis_id] = not self.display_setting[dis_id]
             self.draw_dismode_specific(dis_id)
             self.draw_all(reform=False, draw=False, dis=True)
-
+    
     def draw_dismode_specific(self, dis_id):
         if self.display_setting[dis_id]:
             exec('dis_{0}Tex = PIL.Image.alpha_composite(dis_{0}img, selectedimg)'.format(dis_id))
@@ -398,13 +398,13 @@ class main:
         exec('dis_{0}TexTk = PIL.ImageTk.PhotoImage(dis_{0}Tex)'.format(dis_id))
         exec('self.dis_{0}_b[\'image\'] = dis_{0}TexTk'.format(dis_id))
         exec('self.dis_{0}TexTk = dis_{0}TexTk'.format(dis_id))
-
+    
     def draw_dismode(self):
         display_key_list = list(self.display_setting.keys())
         for dis_key in display_key_list:
             self.draw_dismode_specific(dis_key)
-
-
+    
+    
     ##燃料棒
     def set_core_rod(self, posijk, rod_id=None):
         #输入必须有效!!!
@@ -479,7 +479,7 @@ class main:
                 elif rod_type == 'moderate_rod':
                     self.cores_setting[core_id]['rod'][k]['multi']=0
                 else: pass
-
+    
     def reset_core_rod(self, posijk, clrall=False):
         i,j,k = posijk
         core_id = 'core{}_{}'.format(i,j)
@@ -575,7 +575,7 @@ class main:
                                 self.cores_setting[core_id]['rod'][k]['get_neutron_moderated']=0
                             elif rod_type == 'moderate_rod':
                                 self.cores_setting[core_id]['rod'][k]['multi']=0
-
+    
     #工具设置
     def draw_appand(self, updateid=None):
         keylist = list(self.mouse_setting.keys())
@@ -592,7 +592,7 @@ class main:
             exec('{0}TexTk = PIL.ImageTk.PhotoImage({0}Tex)'.format(updateid))
             exec('self.{0}.itemconfigure(self.{0}_image, image={0}TexTk)'.format(updateid))
             exec('self.{0}TexTk = {0}TexTk'.format(updateid)) # keep img not be deleted
-
+    
     def set_mouse1(self,event, setting=str):
         if self.mouse_setting['m1'] != setting:
             updateid = None
@@ -602,7 +602,7 @@ class main:
                 updateid = self.mouse_setting['m1']
             self.mouse_setting['m1'] = setting
             self.draw_appand(updateid)
-
+    
     def set_mouse2(self,event, setting=str):
         if self.mouse_setting['m2'] != setting:
             updateid = None
@@ -612,7 +612,7 @@ class main:
                 updateid = self.mouse_setting['m2']
             self.mouse_setting['m2'] = setting
             self.draw_appand(updateid)
-
+    
     def set_coolant(self,event, setting=str):
         if self.mouse_setting['coolant'] != setting:
             updateid = None
@@ -631,7 +631,7 @@ class main:
                 message = infomation['molten_sodium']+infomation['molten_sodium_na']
                 self.Balloon_show(my_event,msg=message)
         else: self.nanana = 0
-
+    
     ##燃料棒信息
     def set_rod_inf(self, rod_id):
         rod_type = all_rods[rod_id]['type']
@@ -653,9 +653,9 @@ class main:
             message = infomation[rod_id]
         exec('self.{0}.unbind(\'<Enter>\')'.format(rod_id))
         exec('self.{0}.bind(\'<Enter>\',self.functionAdaptor(self.Balloon_show, msg=message))'.format(rod_id))
-
-
-
+    
+    
+    
     #提示框
     def Balloon_show(self,event,msg):
         if not self.is_start:
@@ -668,14 +668,14 @@ class main:
                 self.balloon.place(x=0,y=self.simwin.winfo_height(),anchor=SW)
             else:
                 self.balloon.place(x=self.simwin.winfo_width(),y=self.simwin.winfo_height(),anchor=SE)
-
+    
     def Balloon_destroy(self,event=None):
         if not self.is_start:
             try:
                 self.balloon.place_forget()
             except:
                 pass
-
+    
     #改变尺寸
     def add_core_num(self):
         if not self.is_start:
@@ -692,7 +692,7 @@ class main:
                 core_id = 'core{}_{}'.format(self.core_num-1,j)
                 self.reset_core_setting(core_id)
             self.form_core()
-
+    
     def reduce_core_num(self):
         if self.core_num > 1 and (not self.is_start):
             # 检测字典
@@ -718,7 +718,7 @@ class main:
                 self.core_num -= 1
                 self.cores_setting['core_num'] = self.core_num
                 self.form_core()
-
+    
     #反应堆部分
     def form_core(self):
         core_size = 600//self.core_num
@@ -735,7 +735,7 @@ class main:
                     self.form_core_cell((i,j), False)
                 #改变信息
                 self.change_core_dis((i,j))
-
+    
     def form_core_cell(self, posij, quarter=False):
         i, j = posij
         core_size = 600//self.core_num
@@ -797,7 +797,7 @@ class main:
             exec('self.core{0}_{1}_cell0.grid(row=0, column=0)'.format(i,j))
             #提示框
             self.set_core_inf((i,j,-1))
-
+    
     #反应堆信息
     def set_core_inf(self, posijk):
         i,j,k = posijk
@@ -825,7 +825,7 @@ class main:
             message = self.cores_setting[core_id]['core_inf'][k]
             exec('self.core{0}_{1}_cell{2}.unbind(\'<Enter>\')'.format(i,j,k))
             exec('self.core{0}_{1}_cell{2}.bind(\'<Enter>\',self.functionAdaptor(self.Balloon_show, msg=message))'.format(i,j,k))
-
+    
     def get_rod_inf(self, rod):
         if rod == None:
             rod_inf = infomation['core_com0'].format(infomation['empty'])
@@ -856,7 +856,7 @@ class main:
                     rod_inf += '\n{}'.format(infomation['core_com12'].format(rod['truning_speed']))
                 else: rod_inf += '\n{}'.format(infomation['core_com13'])
         return rod_inf
-
+    
     #反应堆交互
     def click_core(self, event, posijk):
         if not self.is_start:
@@ -934,7 +934,7 @@ class main:
                     self.draw_core_specific(posijk)
                     self.Balloon_show(event,msg=self.cores_setting[core_id]['core_inf'][k])
                     self.change_core_dis((i,j))
-
+    
     def draw_core_specific(self, posijk, quarter=False):
         i,j,k = posijk
         core_size = 600//self.core_num
@@ -998,7 +998,7 @@ class main:
                 exec('self.{0}_cell{1}.itemconfigure(self.{0}_cell{1}_image, image={0}_cell{1}TexTk)'.format(core_id, k))
                 exec('self.{0}_cell{1}TexTk = {0}_cell{1}TexTk'.format(core_id, k)) # keep img not be deleted
                 self.set_core_inf(posijk)
-
+    
     #信息
     def form_core_dis(self, posijk, core_size):
         ##输入必须有效！
@@ -1039,7 +1039,7 @@ class main:
             exec('self.{0}_cell0_utitext=self.{0}_cell0.create_text({1},{2},text=\'\', anchor=SE, font=font_namesR)'.format(core_id, (core_size-4)*10//16, (core_size-4)*6//16))
             ##progress
             exec('self.{0}_cell0_progtext=self.{0}_cell0.create_text({2},{1},text=\'\', anchor=NW, font=font_namesR)'.format(core_id, (core_size-4)*10//16, (core_size-4)*6//16))
-
+    
     def change_core_dis(self, posij):
         i,j = posij
         if i>=0 and j>=0 and i<self.core_num and j<self.core_num:
@@ -1228,9 +1228,9 @@ class main:
                         exec('self.{0}_cell{1}.itemconfigure(self.{0}_cell{1}_progtext, text=progress_t,fill=progress_c)'.format(core_id,k))
                     else:
                         exec('self.{0}_cell{1}.itemconfigure(self.{0}_cell{1}_progtext, text=\'\')'.format(core_id,k))
-
-
-
+    
+    
+    
     def draw_all(self, reform=True, draw=True, dis=True):
         if reform:
             for i in range(self.core_num):
@@ -1250,9 +1250,9 @@ class main:
             for i in range(self.core_num):
                 for j in range(self.core_num):
                     self.change_core_dis((i,j))
-
+    
 ###############################################
-
+    
     def spread_moderated(self, posij, direction):
         i,j = posij
         out = False
@@ -1279,7 +1279,7 @@ class main:
                             elif rod_type=='moderate_rod':
                                 out = True
         return out
-
+    
     def check_moderated(self,posij):
         i,j = posij
         core_id = 'core{}_{}'.format(i,j)
@@ -1332,7 +1332,7 @@ class main:
             return has_moderated, 'core2x2'
         elif self.cores_setting[core_id]['base'] == None:
             return None, None
-
+    
     def get_active_num(self, posij, direction):
         i,j = posij
         active_num = 0
@@ -1351,7 +1351,7 @@ class main:
                             if all_rods[rod['id']]['type']=='fuel_rod' and (not rod['depleted']):
                                active_num+=1
         return active_num
-
+    
     def cal_multi_num(self, posij):
         i,j = posij
         core_id = 'core{}_{}'.format(i,j)
@@ -1398,7 +1398,7 @@ class main:
             return multi, 'core2x2'
         elif self.cores_setting[core_id]['base'] == None:
             return None, None
-
+    
     def cal_emission_num(self, posij, is_moderated=False):
         i,j = posij
         core_id = 'core{}_{}'.format(i,j)
@@ -1436,7 +1436,7 @@ class main:
             return En, 'core2x2', s
         elif self.cores_setting[core_id]['base'] == None:
             return None, None, None
-
+    
     def get_neutron(self, posijk, oposijk, neutron_num, is_moderated=False):
         i,j,k = posijk
         oi,oj,ok = oposijk
@@ -1473,7 +1473,7 @@ class main:
                     elif rod_type == 'moderate_rod' and is_moderated:
                         if ok == -1: self.cores_setting[ocore_id]['rod']['get_neutron_moderated'] += neutron_num*rod['multi']
                         else:        self.cores_setting[ocore_id]['rod'][ok]['get_neutron_moderated'] += neutron_num*rod['multi']
-
+    
     # 切换
     def switch_neutron(self, posij):
         i,j = posij
@@ -1524,7 +1524,7 @@ class main:
                         rod['get_neutron_moderated'] = 0
                         rod['neutron'] = get_neutron_num
                         rod['truning_speed'] = get_neutron_num
-
+    
     #流体部分
     def cal_fluid(self, posij):
         i,j = posij
@@ -1554,7 +1554,7 @@ class main:
                     elif rod_type == 'breed_rod' or rod_type == 'enrich_rod':
                         fluid += ceil(rod['neutron']/2 * coolant['fluid_eff']) / coolant['heat_capacity']
         self.cores_setting[core_id]['fluid'] = fluid
-
+    
     def cal_all_fluid(self):
         self.coolantkeys = list(all_coolant.keys())
         for coolant_id in self.coolantkeys:
@@ -1567,7 +1567,7 @@ class main:
                     if self.cores_setting['fluid'][coolant_id] == None:
                         self.cores_setting['fluid'][coolant_id] = 0
                     self.cores_setting['fluid'][coolant_id] += self.cores_setting[core_id]['fluid']
-
+    
     #产热部分
     def cal_heat(self, posij):
         i,j = posij
@@ -1597,7 +1597,7 @@ class main:
                     elif rod_type == 'breed_rod' or rod_type == 'enrich_rod':
                         heat += ceil((rod['neutron'] / 2) * coolant['utilization'])
         self.cores_setting[core_id]['heat'] = heat
-
+    
     def cal_all_heat(self):
         heat = 0
         for i in range(self.core_num):
@@ -1605,7 +1605,7 @@ class main:
                 core_id = 'core{}_{}'.format(i,j)
                 heat += self.cores_setting[core_id]['heat']
         self.cores_setting['heat'] = heat
-
+    
     def get_max_heat(self):
         mheat = 0
         for i in range(self.core_num):
@@ -1625,7 +1625,7 @@ class main:
                             if rod_type == 'fuel_rod' and (not rod['depleted']):
                                 mheat += all_rods[rod['id']]['detail']['maximum']
         return mheat
-
+    
     def get_u100_heat(self):
         u100heat = 0
         for i in range(self.core_num):
@@ -1645,8 +1645,8 @@ class main:
                             if rod_type == 'fuel_rod' and (not rod['depleted']):
                                 u100heat += all_rods[rod['id']]['detail']['maximum']*rod['life_multi']
         return u100heat
-
-
+    
+    
     # 增殖部分
     def cal_breed(self, posij):
         i,j = posij
@@ -1662,7 +1662,7 @@ class main:
                 if rod != None and rod['active']:
                     if all_rods[rod['id']]['type'] == 'breed_rod':
                         self.cores_setting[core_id]['rod'][k]['needed'] -= rod['truning_speed']
-
+    
     # 时间轴部分
     def clr_time_graph(self, tick=0):
         self.time_graph.coords(self.selline, (0,0,0,300))
@@ -1671,7 +1671,7 @@ class main:
         for time_s in range(tick//20, (self.timegraph_setting['max_time']//20)+5):
             try: exec('self.time_graph.delete(self.timepoint{})'.format(time_s))
             except: pass
-
+        
         # 此步骤是后加的，目的是为了超临界反应中途开始的时候重新规范函数图像使得其更加可观
         # 只有中途反应并且上限有扩张才会进入此函数
         if tick > 0 and self.timeCount > 1:
@@ -1695,14 +1695,14 @@ class main:
                                    300 - 300 / 2 / self.timeCount)
             # 移动标准放热说明字段
             self.time_graph.coords(self.u100text, 7, 300 - 300 / 2 / self.timeCount - 2)
-
+            
             # 重新绘点
             for i in range(self.tick // 20):
                 x = (i * 20 / self.timegraph_setting['max_time']) * 500
                 heat = eval("self.cores_setting_{}['heat']".format(i))
                 y = (1 - heat / self.timegraph_setting['max_heat']) * 300
                 exec("self.time_graph.coords(self.timepoint{0},{1},{2}-5,{1}+5,{2})".format(i, x, y))
-
+    
     # 统计信息部分
     def updeta_ttinf(self):
         self.data_ttheat['text'] = infomation['ttinf0'].format(self.cores_setting['ttheat'])
@@ -1734,7 +1734,7 @@ class main:
             else:
                 exec('self.fluid_{0}[\'text\'] = \'\''.format(coolant_id))
                 exec('self.fluid_{0}.grid_forget()'.format(coolant_id))
-
+    
     ##### 开始
     def start_sim(self, input_tick):
         #预测
@@ -1864,7 +1864,7 @@ class main:
             #停止后
             self.input_tick = self.tick
             self.draw_all(reform=False, draw=True, dis=True)
-
+        
         ####开始
         self.tick = input_tick
         self.is_start = True
@@ -1879,13 +1879,13 @@ class main:
             self.orig_cores_setting = deepcopy(self.cores_setting)
             self.max_heat = self.get_max_heat()
             self.timegraph_setting['max_heat'] = self.max_heat*2 + 1
-
+        
         self.time_graph.itemconfigure(self.u100text, text=infomation['timeline0'].format(self.max_heat))
-
+        
         def next_20tick():
             ##存储此时的core_setting
             exec('self.cores_setting_{} = deepcopy(self.cores_setting)'.format(self.tick//20))
-
+            
             ##绘制
             ###反应堆部分
             for i in range(self.core_num):
@@ -1896,9 +1896,9 @@ class main:
                     elif self.cores_setting[core_id]['base'] == 'core2x2':
                         for k in range(4): self.set_core_inf((i,j,k))
             ###时间轴部分
-
+            
             heat = self.cores_setting['heat']
-
+            
             # 检测当前放热是否超出画布上界
             if heat >= self.timegraph_setting['max_heat']:
                 # 将图表纵坐标拉伸两倍
@@ -1920,12 +1920,12 @@ class main:
                     # exec("self.timepoint{0} = self.time_graph.create_oval({1},{2}-5,{1}+5,{2},fill={3},outline={4},width=2)".format(
                     #         i, x, y, self.point_color[0], self.point_color[1]))
                     exec("self.time_graph.coords(self.timepoint{0},{1},{2}-5,{1}+5,{2})".format(i, x, y))
-
+            
             # 绘图
-
+            
             heat = self.cores_setting['heat']
             time_s = self.tick//20
-
+            
             x = (self.tick / self.timegraph_setting['max_time']) * 500
             y = (1 - heat / self.timegraph_setting['max_heat']) * 300
             # exec("print(self.cores_setting_{}['heat'])".format(i))
@@ -1934,7 +1934,7 @@ class main:
             ###统计信息部分
             self.updeta_ttinf()
             self.draw_all(reform=False, draw=False, dis=True)
-
+            
             #非慢化发射中子
             for i in range(self.core_num):
                 for j in range(self.core_num):
@@ -2079,13 +2079,13 @@ class main:
                                 else:
                                     self.cores_setting[core_id]['rod'][k]['life_multi'] = 1 * 4
                                     self.cores_setting[core_id]['rod'][k]['overloaded'] = False
-
+            
             #切换中子
             for i in range(self.core_num):
                 for j in range(self.core_num):
                     core_id = 'core{}_{}'.format(i,j)
                     self.switch_neutron((i,j))
-
+            
             ##是否被慢化, 慢化以及取消慢化 moderated
             for i in range(self.core_num):
                 for j in range(self.core_num):
@@ -2098,7 +2098,7 @@ class main:
                         for k in range(4):
                             if has_moderated[k] != None:
                                 self.cores_setting[core_id]['rod'][k]['moderated'] = has_moderated[k]
-
+            
             ##检测全体计算慢化倍数
             for i in range(self.core_num):
                 for j in range(self.core_num):
@@ -2111,7 +2111,7 @@ class main:
                         for k in range(4):
                             if multi[k] != None:
                                 self.cores_setting[core_id]['rod'][k]['multi'] = multi[k]
-
+            
             ##耐久计算
             for i in range(self.core_num):
                 for j in range(self.core_num):
@@ -2127,21 +2127,21 @@ class main:
                             if rod != None and rod['active']:
                                 if all_rods[rod['id']]['type'] == 'fuel_rod' and (not rod['depleted']):
                                     self.cores_setting[core_id]['rod'][k]['life'] -= self.cores_setting[core_id]['rod'][k]['life_multi']
-
+            
             ##产热计算
             for i in range(self.core_num):
                 for j in range(self.core_num):
                     self.cal_heat((i,j))
             ###更新总产热
             self.cal_all_heat()
-
+            
             ##流体计算
             for i in range(self.core_num):
                 for j in range(self.core_num):
                     self.cal_fluid((i,j))
             ###更新总流体
             self.cal_all_fluid()
-
+            
             ##每tick计算项
             for tick in range(20):
                 #产热
@@ -2152,7 +2152,7 @@ class main:
                         self.cal_breed((i,j))
                 #remeber
                 self.tick+=1
-
+            
             ##检测损坏，转换，严重超载来停止
             for i in range(self.core_num):
                 for j in range(self.core_num):
@@ -2188,7 +2188,7 @@ class main:
                                         self.set_core_rod((i,j,k), rod_id=all_rods[rod['id']]['detail']['turnto'])
                                         self.draw_core_specific((i,j,k),True)
                                         self.pause_mid = True
-
+            
             ##时限停止或中途停止
             if self.tick >= self.timegraph_setting['max_time'] and self.is_start:
                 self.is_start = False
@@ -2210,7 +2210,7 @@ class main:
                 self.draw_all(reform=False, draw=True, dis=True)
                 self.pause_b.grid_forget()
                 self.reset_b.grid(row=4, column=6, padx=5, pady=5)
-
+            
             # exec('print(self.cores_setting_{})'.format(self.tick // 20-1))
             #remeber
             self.cores_setting['tttime'] += 1
@@ -2219,13 +2219,13 @@ class main:
         #########
         if self.is_start:
             next_20tick()
-
+    
     def pause_sim(self):
         self.is_start = False
         self.draw_all(reform=False, draw=True, dis=True)
         self.pause_b.grid_forget()
         self.start_b.grid(row=4, column=6, padx=5, pady=5)
-
+    
     def stop_sim(self, input_tick):
         self.pause_sim()
         self.input_tick = 0
@@ -2235,7 +2235,7 @@ class main:
         self.updeta_ttinf()
         self.reset_b.grid_forget()
         self.start_b.grid(row=4, column=6, padx=5, pady=5)
-
+    
     def reset_sim(self):
         self.is_start = False
         self.clr_time_graph()
@@ -2246,14 +2246,14 @@ class main:
         self.updeta_ttinf()
         self.reset_b.grid_forget()
         self.start_b.grid(row=4, column=6, padx=5, pady=5)
-
+        
         self.timeCount = 1
         self.time_graph.delete(self.u100line)
         self.u100line = self.time_graph.create_line(0, 300 / 2, 580, 300 / 2, fill='#ff8888', dash=(4, 4))
         self.time_graph.delete(self.u100text)
         self.u100text = self.time_graph.create_text(7, 300 / 2 - 2, text='', anchor=SW, font=font_normal,
                                                     fill='#9e4545')
-
+    
     ####切换反应堆状态
     def change_time(self, event):
         sel_time = (event.x/500)*self.timegraph_setting['max_time']
@@ -2276,16 +2276,16 @@ class main:
                 self.start_b.grid(row=4, column=6, padx=5, pady=5)
             else:
                 self.reset_b.grid(row=4, column=6, padx=5, pady=5)
-
+    
 ######################################
     def debug(self, event):
         print(self.cores_setting['core0_0']['core_inf'])
-
+    
     def test_bind(self, event, pos):
         print(event)
         print(event.x, event.y)
         print('左键{}'.format(pos))
-
+    
     def heat2col(self, heat):
         midheat = 1000
         heat_relu = self.relu(heat)
@@ -2298,7 +2298,7 @@ class main:
             R = 255
             G = 255 - (color_num-255)
         return '#{:0>2x}{:0>2x}{:0>2x}'.format(R,G,B)
-
+    
     def fluid2col(self, fluid):
         midfluid = 100
         fluid_relu = self.relu(fluid)
@@ -2311,32 +2311,32 @@ class main:
             R = (color_num-135)
             G = 255
         return '#{:0>2x}{:0>2x}{:0>2x}'.format(R,G,B)
-
+    
     def uti2col(self, utilization_N):
         if utilization_N > 1:
             R,G,B = 255,60,60
         else:
             R,G,B = 255,255,255
         return '#{:0>2x}{:0>2x}{:0>2x}'.format(R,G,B)
-
+    
     @staticmethod
     def relu(x):
         y = x if x > 0 else 0
         return y
-
+    
     @staticmethod
     def functionAdaptor(fun,**kwds):
         return lambda event,fun=fun,kwds=kwds:fun(event,**kwds)
-
+    
     @staticmethod
     def functionAdaptor_b(fun,**kwds):
         return lambda fun=fun,kwds=kwds:fun(**kwds)
-
+    
     @staticmethod
     def test_bind1(event, pos):
         print('右键{}'.format(pos))
-
-
+    
+    
     @staticmethod
     def test_bind2(pos):
         print('A{}'.format(pos))
